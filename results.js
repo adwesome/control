@@ -603,6 +603,8 @@ function log() {
 
 
 window.onload = async function() {
+  const content = document.getElementById('content');
+  content.style.visibility = 'visible';
   /*
   const key = get_param_from_url('key');
   var msg_403 = 'Для доступа к ресурсу нужен ключ. ';
