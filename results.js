@@ -603,6 +603,7 @@ function log() {
 
 
 window.onload = async function() {
+  /*
   const key = get_param_from_url('key');
   var msg_403 = 'Для доступа к ресурсу нужен ключ. ';
   const content = document.getElementById('content');
@@ -611,7 +612,7 @@ window.onload = async function() {
     content.innerHTML = msg_403;
     return;
   }
-  /*
+
   if (!a.includes(key)) {
     msg_403 += 'Указанный вами ключ не подходит. '
     content.innerHTML = msg_403;
