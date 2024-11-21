@@ -53,8 +53,7 @@ function draw_ages_checkboxes() {
 }
 
 function apply_filters() {
-  collect_setup();
-  //
+  draw_data();
 }
 
 function enable_listeners() {
@@ -64,6 +63,7 @@ function enable_listeners() {
       apply_filters();
     });
   });
+  /*
   const checkboxes = document.querySelectorAll('.selected_ages');
   checkboxes.forEach((el) => {
     el.addEventListener('change', function(e) {
@@ -85,6 +85,7 @@ function enable_listeners() {
 
     apply_filters();
   });
+  */
 }
 
 function collect_setup() {
@@ -108,7 +109,7 @@ async function get_smth(smth) {
 
 async function get_data() {
   collect_setup();
-  return await get_smth('get/control');
+  return await get_smth(`get/control?bid=${setup.brand}`);
 }
 
 async function draw_data() {
@@ -120,7 +121,7 @@ async function draw_data() {
 }
 
 window.onload = async function() {
-  draw_ages_checkboxes();
+  //draw_ages_checkboxes();
   enable_listeners();
   await draw_data();
 }
