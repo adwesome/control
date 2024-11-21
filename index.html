@@ -44,44 +44,8 @@
         margin-bottom-: 2em;
         padding: 1em;
       }
-      h2 {
-        font-weight: 600;
-      }
-
-      div.dt-container div.dt-layout-row div.dt-layout-cell.dt-layout-end {
-        justify-content: unset;
-        margin-left: unset;
-        width: 100%;
-      }
-
-      #dt-search-0, .dt-search, .dt-input {
-        width: calc(100% - 0px);
-        margin-left: 0 !important;
-      }
-      div.dt-container .dt-search input {
-        border: 1px solid #dee2e6;
-        border-radius: 5px;
-        height: 40px;
-      }
-      .dt-input {
-        padding-left: 8px !important;
-      }
-      .dt-info {
-        margin: 0 0 5px 10px;
-      }
-
       .row {
         margin-bottom: 0.5em;
-      }
-
-      .justify-content-between {
-        display: block;
-      }
-      .mt-2 {
-        margin-top: 5px !important;
-      }
-      #dt-search-0 {
-        font-size: 16px;
       }
 
       .margin-top {
@@ -92,15 +56,9 @@
         cursor: pointer;
       }
 
-      #content {
-        visibility: hidden;
-      }
-
-
-
-
       h2 {
         font-size: 1.5em;
+        font-weight: 600;
       }
       h3 {
         font-size: 1.3em;
@@ -116,7 +74,6 @@
 
     <!--script type="text/javascript" src="data/orgs.js"></script>
     <script type="text/javascript" src="data/votes.js"></script-->
-
     <!--script type="text/javascript" src="src/charts.js"></script>
     <script type="text/javascript" src="src/datatable.js"></script-->
 
@@ -130,15 +87,11 @@
       <h3>Оценка аудитории</h3>
       <div class="row" id="table-">
         <div class="col-lg-3">
-          <label>Зарегистрированные участники:</label>
-          <select class="form-select" id="clarity">
-            <option value="all">Все</option>
-            <option value="clean">Все, кроме сомнительных</option>
-          </select>
-        
           <label>Бренд:</label>
           <select class="form-select" id="brand">
             <option value="all">Все</option>
+            <option value="55">Лента</option>
+            <option value="107">Магнит Косметик</option>
           </select>
         
           <label>Период:</label>
@@ -158,6 +111,15 @@
         
           <label>Возрастные группы:</label>
           <div id="ages" class="filter-item"></div>
+        </div>
+
+        <div class="col-lg-9">
+          <p><br>
+            Всего участников: <span id="players_total"></span><br>
+            Активных за месяц: <span id="players_month"></span><br>
+            Активных за неделю: <span id="players_week"></span><br>
+            Активных за день: <span id="players_day"></span><br>
+          </p>
         </div>
       </div>
     
