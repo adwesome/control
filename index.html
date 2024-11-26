@@ -94,22 +94,13 @@
       <h3>Оценка аудитории</h3>
       <div class="row" id="table-">
         <div class="col-lg-3">
-          <label>Бренд:</label>
+          <label>Брэнд:</label>
           <select class="form-select" id="brand">
-            <option value="-1">Все</option>
             <option value="55">Лента</option>
             <option value="107">Магнит Косметик</option>
           </select>
         
-          <!--label>Период:</label>
-          <select class="form-select" id="time">
-            <option value="all">Все</option>
-            <option value="day">Последние сутки</option>
-            <option value="week">Последняя неделя</option>
-            <option value="month">Последний месяц</option>
-          </select>
-        
-          <label>Пол:</label>
+          <!--label>Пол:</label>
           <select class="form-select" id="sex">
             <option value="all">Все</option>
             <option value="f">Женщины</option>
@@ -122,7 +113,9 @@
       </div>
       <div class="row">
         <div class="col-lg-9">
-          <ul>Всего участников: <span id="players_total"></span>, из них активных:
+          <p style="margin-bottom: 0">Всего участников: <span id="players_total"></span><br>
+              Из них выбрали брэнд: <span id="players_brand"></span> (<span id="players_brand_percent"></span>)</p>
+          <ul>Для брэнда активных:
             <li>за 90 дней: <span id="players_quarter"></span></li>
             <li>за 30 дней: <span id="players_month"></span></li>
             <li>за 7 дней: <span id="players_week"></span></li>

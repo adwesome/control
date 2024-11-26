@@ -118,6 +118,7 @@ async function draw_data() {
   keys.forEach((key) => {
     document.getElementById(key).innerHTML = data.result[key];
   });
+  document.getElementById("players_brand_percent").innerHTML = Math.round(data.result.players_brand * 100 / data.result.players_total) + '%';
 }
 
 window.onload = async function() {
