@@ -114,11 +114,17 @@ async function get_data() {
 
 async function draw_data() {
   const data = await get_data();
-  const keys = Object.keys(data.result);
+  var keys = Object.keys(data.result);
   keys.forEach((key) => {
     document.getElementById(key).innerHTML = data.result[key];
   });
   document.getElementById("players_brand_percent").innerHTML = Math.round(data.result.players_brand * 100 / data.result.players_total) + '%';
+  
+  const base = data.result.players_brand;
+  keys.forEach((key) => {
+    if (!['players_total', 'players_brand'].includes(key))
+      document.getElementById(key + "_percent").innerHTML = Math.round(data.result[key] * 100 / base) + '%';
+  });
 }
 
 window.onload = async function() {
