@@ -63,6 +63,9 @@
       h3 {
         font-size: 1.3em;
       }
+      h4 {
+        font-size: 1.15em;
+      }
       .filer-item, .form-select {
         margin-bottom: 0.5em;
       }
@@ -76,6 +79,16 @@
       }
       ul > li {
         margin-left: 25px;
+      }
+
+      .no-margin-bottom {
+        margin-bottom: 0;
+      }
+      input[type=radio] {
+        margin-right: 5px;
+      }
+      #btnradio2 {
+        margin-left: 15px;
       }
     </style>
 
@@ -91,9 +104,9 @@
 
     <div class="container" id="content">    
       <h2>Управление розыгрышами</h2>
-      <h3>Оценка аудитории</h3>
       <div class="row" id="table-">
-        <div class="col-lg-3">
+        <h3>Оценка аудитории</h3>
+        <div class="col-lg-5">
           <label>Брэнд:</label>
           <select class="form-select" id="brand">
             <option value="55">Лента</option>
@@ -109,11 +122,8 @@
         
           <label>Возрастные группы:</label>
           <div id="ages" class="filter-item"></div-->
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-lg-9">
-          <p style="margin-bottom: 0">Всего участников: <span id="players_total"></span><br>
+        
+          <p class="no-margin-bottom">Всего участников: <span id="players_total"></span><br>
               Из них выбрали брэнд: <span id="players_brand"></span> (<span id="players_brand_percent"></span>)</p>
           <ul>Из выбравших брэнд активных:
             <li>за 90 дней: <span id="players_quarter"></span> (<span id="players_quarter_percent"></span>)</li>
@@ -123,8 +133,40 @@
             <li>за сегодня: <span id="players_today"></span> (<span id="players_today_percent"></span>)</li>
           </ul>
         </div>
-      </div>
     
+        <h3>Маркетинговые кампании</h3>
+        <div class="col-lg-5">
+          <select class="form-select" disabled>
+            <option>29.11 - 01.12, выиграют 2%</option>
+          </select>
+
+          <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+            <input type="radio" name="btnradio" id="btnradio1" autocomplete="off" checked> 
+            <label  for="btnradio1">Работает</label>
+
+            <input type="radio" name="btnradio" id="btnradio2" autocomplete="off"> 
+            <label for="btnradio2">Остановлена</label>
+          </div>
+          <p class="no-margin-bottom">Поучаствовали на данный момент: ... (...% от выбравших брэнд)<br>
+          Выиграли на данный момент: ... (...% от участников)
+          <ul>Из выигравших:
+            <li>Получили подарки: ...</li>
+            <li>Ждем для вручения: ...</li>
+            <li>Не пришли за подарком: ...</li>
+          </ul>
+          </p>
+
+          <h4>Склад подарков данной маркетинговой кампании</h4>
+          <p class="no-margin-bottom">Всего подарков на складе: ...<br>
+          <ul>Из них:
+            <li>Не разыграны: ... (из них возвращены на склад по таймауту: ...)</li>
+            <li>Ждут вручения: ...</li>
+            <li>Вручены: ...</li>
+          </ul>
+
+          </p>
+
+        </div>
     </div>
   </body>
 </html>
