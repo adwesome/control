@@ -137,7 +137,7 @@
             </div>
             
             <div class="col-lg-3">
-              <h3>Оценка размеров аудитории</h3>
+              <h3>Размеры аудитории на основе выбранных фильтров</h3>
               <p class="no-margin-bottom">Всего участников: <span id="players_total"></span><br>
                   Из них выбрали брэнд: <span id="players_brand"></span> (<span id="players_brand_percent"></span>)</p>
               <ul>Из выбравших брэнд активных:
@@ -152,17 +152,28 @@
         
         <div class="col-lg-6">
           <h3>Маркетинговые кампании</h3>
+          <label>Юридическое лицо:</label>
+          <select class="form-select" id="org" disabled>
+            <option value="107">ООО "Название"</option>
+          </select>
+
+          <label>Маркетинговая кампания:</label>
           <select class="form-select" disabled>
-            <option>29.11 - 01.12, респ. Карелия, Сегежа, любой пол, выиграют 2%</option>
+            <option>29.11 - 01.12, респ. Карелия, Сегежа, любой пол, выигрывают 2%</option>
           </select>
 
           <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
             <input type="radio" name="btnradio" id="btnradio1" autocomplete="off" checked disabled> 
-            <label  for="btnradio1">Работает</label>
+            <label  for="btnradio1">Работает / Запланирована</label>
 
             <input type="radio" name="btnradio" id="btnradio2" autocomplete="off" disabled> 
             <label for="btnradio2">Остановлена</label>
+
+            <input type="radio" name="btnradio" id="btnradio2" autocomplete="off" disabled> 
+            <label for="btnradio2">В архиве</label>
           </div>
+          <br><br>
+          <h4>Аналитика маркетинговой кампании</h4>
           <p class="no-margin-bottom">Поучаствовали на данный момент: ... (...% от выбравших брэнд)<br>
           Выиграли на данный момент: ... (...% от участников)
           <ul>Из выигравших:
@@ -172,7 +183,7 @@
           </ul>
           </p>
 
-          <h4>Склад подарков данной маркетинговой кампании</h4>
+          <h4>Склад подарков маркетинговой кампании</h4>
           <p class="no-margin-bottom">Всего подарков на складе: ...<br>
           <ul>Из них:
             <li>Не разыграны: ... (из них возвращены на склад по таймауту: ...)</li>
