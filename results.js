@@ -46,9 +46,9 @@ function draw_ages_checkboxes() {
   let result = '';
   for (id in ages) {
     const label = ages[id];
-    result = `<label class="ages-group"><input type="checkbox" class="selected_ages" name="" value="${id}" checked> ${label}</label><br>` + result;
+    result = `<label class="ages-group"><input type="checkbox" class="selected_ages" name="" value="${id}" checked disabled> ${label}</label><br>` + result;
   }
-  result = `<label class="ages-group"><input type="checkbox" id="all_ages" name="" value="all" checked> <b>Все</b></label><br>` + result;
+  result = `<label class="ages-group"><input type="checkbox" id="all_ages" name="" value="all" checked disabled> <b>Все</b></label><br>` + result;
   document.getElementById("ages").innerHTML = result;
 }
 
@@ -128,7 +128,7 @@ async function draw_data() {
 }
 
 window.onload = async function() {
-  //draw_ages_checkboxes();
+  draw_ages_checkboxes();
   enable_listeners();
   await draw_data();
 }

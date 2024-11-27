@@ -105,39 +105,55 @@
     <div class="container" id="content">    
       <h2>Управление розыгрышами</h2>
       <div class="row" id="table-">
-        <h3>Оценка аудитории</h3>
-        <div class="col-lg-5">
-          <label>Брэнд:</label>
-          <select class="form-select" id="brand">
-            <option value="55">Лента</option>
-            <option value="107">Магнит Косметик</option>
-          </select>
         
-          <!--label>Пол:</label>
-          <select class="form-select" id="sex">
-            <option value="all">Все</option>
-            <option value="f">Женщины</option>
-            <option value="m">Мужчины</option>
-          </select>
+          
+            <div class="col-lg-3">
+              <h3>Фильтры</h3>
+              <label>Брэнд:</label>
+              <select class="form-select" id="brand">
+                <option value="55">Лента</option>
+                <option value="107">Магнит Косметик</option>
+              </select>
+            
+              <label>Регион:</label>
+              <select id="region" class="form-select" disabled>
+                <option value="10">респ. Карелия</option>
+              </select>
+              
+              <label id="city_label" style="display-: none;">Город:</label>
+              <select id="city" class="form-select" style="display-: none;" disabled>
+                <option value="11">Сегежа</option>
+              </select>
+
+              <label>Пол:</label>
+              <select class="form-select" id="sex" disabled>
+                <option value="all">Все</option>
+                <option value="f">Женщины</option>
+                <option value="m">Мужчины</option>
+              </select>
+            
+              <label>Возрастные группы:</label>
+              <div id="ages" class="filter-item"></div>
+            </div>
+            
+            <div class="col-lg-3">
+              <h3>Оценка аудитории</h3>
+              <p class="no-margin-bottom">Всего участников: <span id="players_total"></span><br>
+                  Из них выбрали брэнд: <span id="players_brand"></span> (<span id="players_brand_percent"></span>)</p>
+              <ul>Из выбравших брэнд активных:
+                <li>за 90 дней: <span id="players_quarter"></span> (<span id="players_quarter_percent"></span>)</li>
+                <li>за 30 дней: <span id="players_month"></span> (<span id="players_month_percent"></span>)</li>
+                <li>за 7 дней: <span id="players_week"></span> (<span id="players_week_percent"></span>)</li>
+                <li>за вчера: <span id="players_yesterday"></span> (<span id="players_yesterday_percent"></span>)</li>
+                <li>за сегодня: <span id="players_today"></span> (<span id="players_today_percent"></span>)</li>
+              </ul>
+            </div>
+          
         
-          <label>Возрастные группы:</label>
-          <div id="ages" class="filter-item"></div-->
-        
-          <p class="no-margin-bottom">Всего участников: <span id="players_total"></span><br>
-              Из них выбрали брэнд: <span id="players_brand"></span> (<span id="players_brand_percent"></span>)</p>
-          <ul>Из выбравших брэнд активных:
-            <li>за 90 дней: <span id="players_quarter"></span> (<span id="players_quarter_percent"></span>)</li>
-            <li>за 30 дней: <span id="players_month"></span> (<span id="players_month_percent"></span>)</li>
-            <li>за 7 дней: <span id="players_week"></span> (<span id="players_week_percent"></span>)</li>
-            <li>за вчера: <span id="players_yesterday"></span> (<span id="players_yesterday_percent"></span>)</li>
-            <li>за сегодня: <span id="players_today"></span> (<span id="players_today_percent"></span>)</li>
-          </ul>
-        </div>
-    
-        <h3>Маркетинговые кампании</h3>
-        <div class="col-lg-5">
+        <div class="col-lg-6">
+          <h3>Маркетинговые кампании</h3>
           <select class="form-select" disabled>
-            <option>29.11 - 01.12, выиграют 2%</option>
+            <option>29.11 - 01.12, респ. Карелия, Сегежа, любой пол, выиграют 2%</option>
           </select>
 
           <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
@@ -167,6 +183,7 @@
           </p>
 
         </div>
+      </div>
     </div>
   </body>
 </html>
