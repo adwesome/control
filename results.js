@@ -126,6 +126,8 @@ async function draw_data() {
       document.getElementById(key + "_percent").innerHTML = Math.round(data.audience[key] * 100 / base) + '%';
   });
 
+  document.getElementById('par_total').innerHTML = data.campaign.par_total;
+  document.getElementById('par_total_percent').innerHTML = Math.round(data.campaign.par_total * 100 / data.audience.players_brand);
   document.getElementById('par_today').innerHTML = data.campaign.par_today;
   document.getElementById('par_today_percent').innerHTML = Math.round(data.campaign.par_today * 100 / data.audience.players_brand);
 }
