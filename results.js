@@ -114,17 +114,20 @@ async function get_data() {
 
 async function draw_data() {
   const data = await get_data();
-  var keys = Object.keys(data.result);
+  var keys = Object.keys(data.audience);
   keys.forEach((key) => {
-    document.getElementById(key).innerHTML = data.result[key];
+    document.getElementById(key).innerHTML = data.audience[key];
   });
-  document.getElementById("players_brand_percent").innerHTML = Math.round(data.result.players_brand * 100 / data.result.players_total) + '%';
+  document.getElementById("players_brand_percent").innerHTML = Math.round(data.audience.players_brand * 100 / data.audience.players_total) + '%';
   
-  const base = data.result.players_brand;
+  const base = data.audience.players_brand;
   keys.forEach((key) => {
     if (!['players_total', 'players_brand'].includes(key))
-      document.getElementById(key + "_percent").innerHTML = Math.round(data.result[key] * 100 / base) + '%';
+      document.getElementById(key + "_percent").innerHTML = Math.round(data.audience[key] * 100 / base) + '%';
   });
+
+  document.getElementById('par_today').innerHTML = data.campaign.par_today;
+  document.getElementById('par_today_percent').innerHTML = Math.round(data.campaign.par_today * 100 / data.audience.players_brand);
 }
 
 window.onload = async function() {
