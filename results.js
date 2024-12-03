@@ -124,13 +124,14 @@ async function draw_data() {
   const data = await get_data();
   var keys = Object.keys(data.audience);
   keys.forEach((key) => {
+    console.log(key)
     document.getElementById(key).innerHTML = data.audience[key];
   });
   document.getElementById("players_brand_percent").innerHTML = Math.round(data.audience.players_brand * 100 / data.audience.players_total) + '%';
   
   const base = data.audience.players_brand;
   keys.forEach((key) => {
-    if (!['players_total', 'players_brand'].includes(key))
+    if (!['players_total', 'players_brand', 'players_churned'].includes(key))
       document.getElementById(key + "_percent").innerHTML = Math.round(data.audience[key] * 100 / base) + '%';
   });
 
