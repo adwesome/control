@@ -113,7 +113,7 @@ async function get_data() {
 }
 
 function draw_cohorts(cohorts) {
-  var result = '<table class="table table-sm"><tr><th style="border: 0" rowspan="2" colspan="2"></th><th colspan="6" style="text-align: center;">Участвуют в розыгрышах</th></tr>';
+  var result = '<table class="table table-sm"><tr><th style="border: 0" rowspan="2" colspan="2"></th><th colspan="6" style="text-align: center;">Участвуют в розыгрышах, дн. подряд</th></tr>';
   const map = {0: 'Сегодня'};
   const max_cols = cohorts[0].length + 1;
   for (let j = 0; j < max_cols - 1; j++) {
@@ -122,7 +122,7 @@ function draw_cohorts(cohorts) {
     //else if (j == 0)
     //  result += `<th>Пришли</th>`;
     else
-      result += `<th style="font-weight: normal;">${j} дн.</th>`;
+      result += `<th style="font-weight: normal;">${j+1} дн.</th>`;
   }
   result += `<tr><td rowspan="${cohorts.length + 1}" style="writing-mode: vertical-rl; writing-mode: vertical-rl;
     transform: rotate(180deg);
