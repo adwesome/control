@@ -114,13 +114,13 @@ async function get_data() {
 
 function draw_cohorts(cohorts) {
   var result = '<table class="table table-sm">';
-  const map = {0: 'Сегодня', 1: 'Вчера'};
+  const map = {0: 'Сегодня'};
   const max_cols = cohorts[0].length + 1;
   for (let j = -1; j < max_cols - 1; j++) {
     if (j == -1)
       result += `<th></th>`;
-    else if (j == 0)
-      result += `<th>Пришли</th>`;
+    //else if (j == 0)
+    //  result += `<th>Пришли</th>`;
     else
       result += `<th>${j} день</th>`;
   }
@@ -135,9 +135,9 @@ function draw_cohorts(cohorts) {
     for (let j = 0; j < max_cols; j++) {
       const cc = c[j];
       if (cc != undefined && c[0])
-        result += `<td class="cohort-data">${cc} <span class="cohort-data-percent">${Math.round(cc * 100/c[0])}%</span></td>`;
+        result += `<td class="cohort-data">${cc}<br><span class="cohort-data-percent">${Math.round(cc * 100/c[0])}%</span></td>`;
       else if (cc != undefined && c[0] == 0)
-        result += `<td class="cohort-data">${cc} <span class="cohort-data-percent">100%</span></td>`;
+        result += `<td class="cohort-data">${cc}<br><span class="cohort-data-percent">100%</span></td>`;
       else
         result += '<td></td>';
     }
@@ -153,11 +153,11 @@ async function draw_data() {
     console.log(key)
     document.getElementById(key).innerHTML = data.audience[key];
   });
-  document.getElementById("players_brand_percent").innerHTML = Math.round(data.audience.players_brand * 100 / data.audience.players_total) + '%';
+  document.getElementById("players_brand_percent").innerHTML = Math.round(data.audience.players_brand * 100 / data.audience.players_total_active) + '%';
   
-  const base = data.audience.players_brand;
+  const base = data.audience.players_total_active;
   keys.forEach((key) => {
-    if (!['players_total', 'players_brand', 'players_churned'].includes(key))
+    if (!['players_total', 'players_brand', 'players_churned', 'players_total_active'].includes(key))
       document.getElementById(key + "_percent").innerHTML = Math.round(data.audience[key] * 100 / base) + '%';
   });
 
