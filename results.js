@@ -133,7 +133,7 @@ function draw_cohorts(cohorts) {
     for (let j = 0; j < max_cols; j++) {
       const cc = c[j];
       if (cc != undefined)
-        result += '<td class="cohort-data">' + cc + '</td>';
+        result += `<td class="cohort-data">${cc} <span class="cohort-data-percent">${Math.round(cc * 100/c[0])}%</span></td>`;
       else
         result += '<td></td>';
     }
