@@ -134,8 +134,10 @@ function draw_cohorts(cohorts) {
       result += `<td>${i} дн. назад</td>`;
     for (let j = 0; j < max_cols; j++) {
       const cc = c[j];
-      if (cc != undefined)
+      if (cc != undefined && c[0])
         result += `<td class="cohort-data">${cc} <span class="cohort-data-percent">${Math.round(cc * 100/c[0])}%</span></td>`;
+      else if (cc != undefined && c[0] == 0)
+        result += `<td class="cohort-data">${cc} <span class="cohort-data-percent">100%</span></td>`;
       else
         result += '<td></td>';
     }
