@@ -114,11 +114,13 @@ async function get_data() {
 
 function draw_cohorts(cohorts) {
   var result = '<table class="table table-sm">';
-  const map = {0: 'Сегодня', 1: 'Вчера', 2: 'Позавчера'};
+  const map = {0: 'Сегодня', 1: 'Вчера'};
   const max_cols = cohorts[0].length + 1;
   for (let j = -1; j < max_cols - 1; j++) {
     if (j == -1)
       result += `<th></th>`;
+    else if (j == 0)
+      result += `<th>Пришли</th>`;
     else
       result += `<th>${j} день</th>`;
   }
@@ -129,7 +131,7 @@ function draw_cohorts(cohorts) {
     if (map[i])
       result += '<td>' + map[i] + '</td>';
     else
-      result += `<td>${i} дня назад</td>`;
+      result += `<td>${i} дн. назад</td>`;
     for (let j = 0; j < max_cols; j++) {
       const cc = c[j];
       if (cc != undefined)
