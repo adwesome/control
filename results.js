@@ -113,17 +113,23 @@ async function get_data() {
 }
 
 function draw_cohorts(cohorts) {
-  var result = '<table class="table table-sm">';
+  var result = '<table class="table table-sm"><tr><th style="border: 0" rowspan="2" colspan="2"></th><th colspan="6" style="text-align: center;">Участвуют в розыгрышах</th></tr>';
   const map = {0: 'Сегодня'};
   const max_cols = cohorts[0].length + 1;
-  for (let j = -1; j < max_cols - 1; j++) {
+  for (let j = 0; j < max_cols - 1; j++) {
     if (j == -1)
       result += `<th></th>`;
     //else if (j == 0)
     //  result += `<th>Пришли</th>`;
     else
-      result += `<th>${j} день</th>`;
+      result += `<th style="font-weight: normal;">${j} дн.</th>`;
   }
+  result += `<tr><td rowspan="${cohorts.length + 1}" style="writing-mode: vertical-rl; writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    text-align: center;
+    font-weight: bold;
+    border: 0;
+    ">Пришли впервые</td></tr>`;
   cohorts.reverse();
   for (let i = 0; i < cohorts.length; i++) {
     const c = cohorts[i];
@@ -132,7 +138,7 @@ function draw_cohorts(cohorts) {
       result += '<td>' + map[i] + '</td>';
     else
       result += `<td>${i} дн. назад</td>`;
-    for (let j = 0; j < max_cols; j++) {
+    for (let j = 0; j < max_cols - 1; j++) {
       const cc = c[j];
       if (cc != undefined && c[0]) {
         const percent = Math.round(cc * 100/c[0]);
