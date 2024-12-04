@@ -134,10 +134,18 @@ function draw_cohorts(cohorts) {
       result += `<td>${i} дн. назад</td>`;
     for (let j = 0; j < max_cols; j++) {
       const cc = c[j];
-      if (cc != undefined && c[0])
-        result += `<td class="cohort-data">${cc}<br><span class="cohort-data-percent">${Math.round(cc * 100/c[0])}%</span></td>`;
+      if (cc != undefined && c[0]) {
+        const percent = Math.round(cc * 100/c[0]);
+        result += `<td class="cohort-data`;
+        if (percent >= 60)
+          result += ' cohort-strong';
+        if (percent <= 20)
+          result += ' cohort-weak'
+        result += `">${cc}<br><span class="cohort-data-percent`
+        result += `">${percent}%</span></td>`;
+      }
       else if (cc != undefined && c[0] == 0)
-        result += `<td class="cohort-data">${cc}<br><span class="cohort-data-percent">100%</span></td>`;
+        result += `<td class="cohort-data cohort-strong">${cc}<br><span class="cohort-data-percent">100%</span></td>`;
       else
         result += '<td></td>';
     }
