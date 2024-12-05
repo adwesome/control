@@ -170,7 +170,7 @@ async function draw_data() {
   });
   document.getElementById("players_brand_percent").innerHTML = Math.round(data.audience.players_brand * 100 / data.audience.players_total_active) + '%';
   
-  const base = data.audience.players_total_active;
+  const base = data.audience.players_brand;
   keys.forEach((key) => {
     if (!['players_total', 'players_brand', 'players_churned', 'players_total_active'].includes(key))
       document.getElementById(key + "_percent").innerHTML = Math.round(data.audience[key] * 100 / base) + '%';
