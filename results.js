@@ -169,7 +169,8 @@ async function draw_data() {
     document.getElementById(key).innerHTML = data.audience[key];
   });
   document.getElementById("players_brand_percent").innerHTML = Math.round(data.audience.players_brand * 100 / data.audience.players_total_active) + '%';
-  
+  document.getElementById("players_churned_percent").innerHTML = Math.round(data.audience.players_churned * 100 / data.audience.players_total) + '%';
+
   const base = data.audience.players_brand;
   keys.forEach((key) => {
     if (!['players_total', 'players_brand', 'players_churned', 'players_total_active'].includes(key))
