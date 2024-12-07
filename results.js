@@ -113,7 +113,7 @@ async function get_data() {
 }
 
 function draw_cohorts(cohorts) {
-  var result = '<table class="table table-sm"><tr><th style="border: 0" rowspan="2" colspan="2"></th><th colspan="6" style="text-align: center;">Участвуют в розыгрышах, дней подряд</th></tr>';
+  var result = '<table class="table table-sm"><tr><th style="border: 0" rowspan="2" colspan="2"></th><th colspan="6" style="text-align: center;">Участвуют, дней подряд</th></tr>';
   const map = {0: 'Сегодня'};
   const max_cols = cohorts[0].length + 1;
   for (let j = 0; j < max_cols - 1; j++) {
