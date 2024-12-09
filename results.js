@@ -49,7 +49,7 @@ function draw_ages_checkboxes() {
     result = `<label class="ages-group"><input type="checkbox" class="selected_ages" name="" value="${id}" checked disabled> ${label}</label><br>` + result;
   }
   result = `<label class="ages-group"><input type="checkbox" id="all_ages" name="" value="all" checked disabled> <b>Все</b></label><br>` + result;
-  document.getElementById("ages").innerHTML = result;
+  //document.getElementById("ages").innerHTML = result;
 }
 
 function apply_filters() {
