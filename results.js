@@ -148,6 +148,8 @@ function draw_cohorts(cohorts) {
           result += 'cohort-weak ';
         if (cc > cc_previous)
           result += 'negative-churn ';
+        if (cc == cc_previous)
+          result += 'keep-score ';
         if (percent >= 60)
           result += 'cohort-strong ';
 
