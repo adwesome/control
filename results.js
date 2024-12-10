@@ -138,16 +138,19 @@ function draw_cohorts(cohorts) {
       result += '<td>' + map[i] + '</td>';
     else
       result += `<td>${i} дн. назад</td>`;
+    let cc_previous;
     for (let j = 0; j < max_cols - 1; j++) {
       const cc = c[j];
       if (cc != undefined && c[0]) {
         const percent = Math.round(cc * 100/c[0]);
         result += `<td class="cohort-data `;
-        if (percent >= 60)
-          result += 'cohort-strong ';
         if (percent <= 20)
           result += 'cohort-weak ';
-        
+        if (cc > cc_previous)
+          result += 'negative-churn ';
+        if (percent >= 60)
+          result += 'cohort-strong ';
+
         result += `">${cc}<br><span class="cohort-data-percent`
         result += `">${percent}%</span></td>`;
       }
@@ -155,6 +158,8 @@ function draw_cohorts(cohorts) {
         result += `<td class="cohort-data cohort-weak">${cc}<br><span class="cohort-data-percent">100%</span></td>`;
       else
         result += '<td></td>';
+
+      cc_previous = cc;
     }
     result += '</tr>';
   }
