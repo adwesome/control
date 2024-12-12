@@ -189,7 +189,7 @@
               <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Кампании</button>
             </li>
             <li class="nav-item" role="presentation">
-              <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Оценка аудитории</button>
+              <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Аудитория</button>
             </li>
           </ul>
           <div class="tab-content" id="myTabContent">
@@ -216,7 +216,7 @@
                     <ul class="list">Из них:
                       <li>поучаствовали вчера: <span id="par_yesterday">ждем</span> (<span id="par_yesterday_percent">ждем</span>% от выбравших бренд)</li>
                       <li>поучаствовали сегодня: <span id="par_today">ждем</span> (<span id="par_today_percent">ждем</span>% от выбравших бренд)</li>
-                      <li>выигрывают сегодня: 3 <!--a href="#" class="btn btn-sm btn-warning disabled">Разыграть принудительно +1 подарок</a--></li>
+                      <li>выигрывают сегодня: ... <!--a href="#" class="btn btn-sm btn-warning disabled">Разыграть принудительно +1 подарок</a--></li>
                     </ul>
                   Всего выиграли на данный момент: ... (...% от участников)<br>
                   <ul class="list">Из выигравших:
@@ -242,24 +242,30 @@
             </div>
             <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
               <div class="row">
-                <div class="col-lg-5">
+                <div class="col-lg-4">
                   <h3>Размеры аудитории</h3>
                   <p class="no-margin-bottom">
                     Всего участников (с 29.11.2024): <span id="players_total"></span><br>
-                    Из них отключили бота: <span id="players_churned"></span> (<span id="players_churned_percent"></span>)<br>
-                    Всего с активным ботом: <span id="players_total_active"></span>, из которых отметили бренд организации: <span id="players_brand"></span> (<span id="players_brand_percent"></span>)
+                    <ul class="list">Из них отключили бота: 
+                      <li>Всего (Avg. Churn Rate): <span id="players_churned"></span> (<span id="players_churned_percent"></span>)</li>
+                      <li>за 30 дней: ...</li>
+                      <li>за 7 дней: ...</li>
+                      <li>за вчера: ...</li>
+                    </ul>
+                    Всего участников с активным ботом: <span id="players_total_active"></span><br>
+                    Из них отметили бренд организации: <span id="players_brand"></span> (<span id="players_brand_percent"></span>)
                   </p>
-                  <ul class="list">Из отметивших бренд активных:
+                  <ul class="list">Из отметивших бренд, активных:
                     <li style="display: none;">за 90 дней: <span id="players_quarter">ждем</span> (<span id="players_quarter_percent">ждем</span>)</li>
-                    <li>за 30 дней: <span id="players_month">ждем</span> (<span id="players_month_percent">ждем</span>)</li>
-                    <li>за 7 дней: <span id="players_week">ждем</span> (<span id="players_week_percent">ждем</span>)</li>
-                    <li>за позавчера: <span id="players_day_before_yesterday">ждем</span> (<span id="players_day_before_yesterday_percent">ждем</span>)</li>
-                    <li>за вчера: <span id="players_yesterday">ждем</span> (<span id="players_yesterday_percent">ждем</span>)</li>
-                    <li>за сегодня: <span id="players_today">ждем</span> (<span id="players_today_percent">ждем</span>)</li>
+                    <li>за 30 дней (MAU): <span id="players_month">ждем</span> (<span id="players_month_percent">ждем</span>)</li>
+                    <li>за 7 дней (WAU): <span id="players_week">ждем</span> (<span id="players_week_percent">ждем</span>)</li>
+                    <li>за позавчера (DAU): <span id="players_day_before_yesterday">ждем</span> (<span id="players_day_before_yesterday_percent">ждем</span>)</li>
+                    <li>за вчера (DAU): <span id="players_yesterday">ждем</span> (<span id="players_yesterday_percent">ждем</span>)</li>
+                    <li>за сегодня (DAU): <span id="players_today">ждем</span> (<span id="players_today_percent">ждем</span>)</li>
                   </ul>
                 </div>
 
-                <div class="col-lg-7">
+                <div class="col-lg-12">
                   <h3>Когортный анализ: новые участники</h3>
                   <div id="cohorts">ждем</div>
                 </div>
