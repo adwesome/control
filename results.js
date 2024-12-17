@@ -141,7 +141,7 @@ function draw_cohorts(cohorts) {
     let cc_previous;
     for (let j = 0; j < max_cols - 1; j++) {
       const cc = c[j];
-      if (cc != undefined && c[0]) {
+      if (cc != undefined && c[j]) {
         const percent = Math.round(cc * 100/c[0]);
         result += `<td class="cohort-data `;
         if (percent <= 20)
@@ -156,7 +156,7 @@ function draw_cohorts(cohorts) {
         result += `">${cc}<br><span class="cohort-data-percent`
         result += `">${percent}%</span></td>`;
       }
-      else if (cc != undefined && c[0] == 0)
+      else if (cc != undefined && c[j] == 0)
         result += `<td class="cohort-data cohort-weak">${cc}<br><span class="cohort-data-percent">100%</span></td>`;
       else
         result += '<td></td>';
