@@ -52,8 +52,9 @@ function draw_ages_checkboxes() {
   //document.getElementById("ages").innerHTML = result;
 }
 
-function apply_filters() {
-  draw_data();
+async function apply_filters() {
+  const data = await get_data();
+  draw_data(data);
 }
 
 function enable_listeners() {
