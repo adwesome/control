@@ -20,9 +20,9 @@
 
     <!--script src="https://telegram.org/js/telegram-web-app.js"></script--> <!-- https://core.telegram.org/bots/webapps#initializing-web-apps -->
 
-    <!--script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <!--script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 
     <link href="https://cdn.datatables.net/v/bs5/dt-2.1.8/r-3.0.3/datatables.min.css" rel="stylesheet">
     <script src="https://cdn.datatables.net/v/bs5/dt-2.1.8/r-3.0.3/datatables.min.js"></script-->
@@ -188,14 +188,14 @@
         <div class="col-lg-12">
           <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
-              <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Кампании</button>
+              <button class="nav-link active" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Поведение аудитории</button>
             </li>
             <li class="nav-item" role="presentation">
-              <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Аудитория</button>
+              <button class="nav-link " id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Маркетинговые кампании</button>
             </li>
           </ul>
           <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+            <div class="tab-pane fade" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
               <div class="row">
                 <div class="col-lg-12">
                   <!--h3>Маркетинговая кампания</h3>
@@ -215,7 +215,7 @@
                   <h3>Аналитика кампании</h3>
                   <p class="no-margin-bottom">Всего поучаствовали <b>уникальных</b> на данный момент (с 9.12.2024): <span id="par_total">ждем</span> (<span id="par_total_percent">ждем</span>% от выбравших бренд)<br>
                     <ul class="list">Из них:
-                      <li>поучаствовали вчера: <span id="par_yesterday">ждем</span> (<span id="par_yesterday_percent">ждем</span>% от выбравших бренд)</li>
+                      <li>поучаствовали вчера: <span id="par_yesterday">ждем</span> (<span id="par_yesterday_percent">ждем</span>% от выбравших бренд организации)</li>
                       <li>участвуют сегодня: <span id="par_today">ждем</span> (<span id="par_today_percent">ждем</span>% от выбравших бренд)</li>
                       <!--li>выигрывают сегодня: ... <!-a href="#" class="btn btn-sm btn-warning disabled">Разыграть принудительно +1 подарок</a-></li-->
                     </ul>
@@ -241,14 +241,14 @@
             
 
             </div>
-            <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+            <div class="tab-pane fade show active" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
               <div class="row">
                 <div class="col-lg-4">
                   <h3>Размеры аудитории</h3>
                   <p class="no-margin-bottom">
                     Всего участников (с 29.11.2024): <span id="players_total"></span><br>
                     <ul class="list">Из них отключили бота: 
-                      <li>Всего (Avg. Churn Rate): <span id="players_churned"></span> (<span id="players_churned_percent"></span>)</li>
+                      <li>всего (Avg. Churn Rate): <span id="players_churned"></span> (<span id="players_churned_percent"></span>)</li>
                       <!--li>за 30 дней: ...</li>
                       <li>за 7 дней: ...</li>
                       <li>за вчера: ...</li-->
@@ -264,6 +264,11 @@
                     <li>за вчера (DAU): <span id="players_yesterday">ждем</span> (<span id="players_yesterday_percent">ждем</span>)</li>
                     <li>за сегодня (DAU): <span id="players_today">ждем</span> (<span id="players_today_percent">ждем</span>)</li>
                   </ul>
+                </div>
+
+                <div class="col-lg-8">
+                  <h3>Активность аудитории в течение суток</h3>
+                  <div id="chart-wrapper"><canvas id="chart-participation"></canvas></div>
                 </div>
 
                 <div class="col-lg-12">

@@ -168,11 +168,10 @@ function draw_cohorts(cohorts) {
   return result += '</table>';
 }
 
-async function draw_data() {
-  const data = await get_data();
+function draw_data(data) {
   var keys = Object.keys(data.audience);
   keys.forEach((key) => {
-    console.log(key)
+    //console.log(key)
     document.getElementById(key).innerHTML = data.audience[key];
   });
   document.getElementById("players_brand_percent").innerHTML = Math.round(data.audience.players_brand * 100 / data.audience.players_total_active) + '%';
@@ -193,8 +192,143 @@ async function draw_data() {
   document.getElementById('cohorts').innerHTML = draw_cohorts(data.cohorts);
 }
 
+function make_dataset(data) {
+  var dataset = {'number': [], 'integral': []};
+  if (data.length > 1) {
+    for (let i = 0; i < 24; i++) {
+      var sum = 0;
+      for (let j = 0; j < data.length; j++) {
+        if (data[j][i])
+          sum += data[j][i];
+      }
+      dataset.number.push(sum / data.length);
+    }
+  }
+  else {
+    dataset.number = data[0];
+  }
+  var total = 0;
+  for (let i = 0; i < 24; i++) {
+    if (dataset.number[i])
+      total += dataset.number[i];
+  }
+
+  var integral = 0;
+  for (let i = 0; i < 24; i++) {
+    if (dataset.number[i])
+      integral += dataset.number[i] * 100 / total;
+
+    dataset.integral.push(integral);
+  }
+
+  return dataset;
+}
+
+function draw_chart(data) {
+  const bd = make_dataset(data.business_days);
+  const wd = make_dataset(data.weekends);
+  const td = make_dataset(data.today);
+
+  var datasets = [
+    {
+      label: "Сегодня",
+      data: td.number,
+      borderColor: 'forestgreen',
+      tension: 0.3,
+      pointRadius: 0,
+      borderWidth: 3,
+      yAxisID: 'y',
+    },
+    {
+      label: "Будни",
+      data: bd.number,
+      borderColor: 'lightskyblue',
+      tension: 0.3,
+      pointRadius: 0,
+      borderWidth: 1.5,
+      yAxisID: 'y',
+    },
+    {
+      label: "Выходные",
+      data: wd.number,
+      borderColor: 'lightsalmon',
+      tension: 0.3,
+      pointRadius: 0,
+      borderWidth: 1.5,
+      yAxisID: 'y',
+    },
+    {
+      label: "Сегодня, интеграл",
+      data: td.integral,
+      borderColor: 'forestgreen',
+      tension: 0.3,
+      pointRadius: 0,
+      borderWidth: 1,
+      yAxisID: 'y1',
+      borderDash: [10,5],
+    },
+    {
+      label: "Будни, интеграл",
+      data: bd.integral,
+      borderColor: 'lightskyblue',
+      tension: 0.3,
+      pointRadius: 0,
+      borderWidth: 1,
+      yAxisID: 'y1',
+      borderDash: [10,5],
+    },
+    {
+      label: "Выходные, интеграл",
+      data: wd.integral,
+      borderColor: 'lightsalmon',
+      tension: 0.3,
+      pointRadius: 0,
+      borderWidth: 1,
+      yAxisID: 'y1',
+      borderDash: [10,5],
+    },
+  ];
+
+  new Chart('chart-participation', {
+    type: 'line',
+    label: 'jj',
+    data: {
+      labels: [...Array(24).keys()],
+      datasets: datasets,
+    },
+    options: {
+      plugins: {
+        title: {
+          display: false,
+          text: 'Как пользователи приходят в приложение в течение суток'
+        }
+      },
+      scales: {
+        y: {
+          type: 'linear',
+          display: true,
+          position: 'left',
+        },
+        y1: {
+          type: 'linear',
+          display: true,
+          position: 'right',
+          max: 100,
+
+          // grid line settings
+          grid: {
+            drawOnChartArea: false, // only want the grid lines for one axis to show up
+          },
+        },
+      },
+    },
+  });
+}
+
 window.onload = async function() {
   draw_ages_checkboxes();
   enable_listeners();
-  await draw_data();
+  const data = await get_data();
+  draw_data(data);
+  draw_chart(data.charts.participation);
 }
