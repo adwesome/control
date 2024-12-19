@@ -298,7 +298,6 @@ function draw_chart(data) {
 
   new Chart('chart-participation', {
     type: 'line',
-    label: 'jj',
     data: {
       labels: [...Array(24).keys()],
       datasets: datasets,
