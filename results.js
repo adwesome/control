@@ -267,6 +267,7 @@ function draw_chart(data) {
       borderWidth: 1,
       yAxisID: 'y1',
       borderDash: [10,5],
+      hidden: true,
     },
     {
       label: "Будни, интеграл",
