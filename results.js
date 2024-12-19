@@ -55,6 +55,7 @@ function draw_ages_checkboxes() {
 async function apply_filters() {
   const data = await get_data();
   draw_data(data);
+  draw_chart(data.charts.participation);
 }
 
 function enable_listeners() {
@@ -290,6 +291,10 @@ function draw_chart(data) {
       borderDash: [10,5],
     },
   ];
+
+  if (Chart.getChart('chart-participation')) {  // https://stackoverflow.com/questions/72641188/canvas-is-already-in-use-chart-with-id-0-must-be-destroyed-before-the-canvas
+    Chart.getChart('chart-participation')?.destroy();
+  }
 
   new Chart('chart-participation', {
     type: 'line',
