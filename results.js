@@ -216,9 +216,9 @@ function make_dataset(data) {
   }
 
   var integral = 0;
-  for (let i = 0; i < 24; i++) {
+  for (let i = 0; i < dataset.number.length; i++) {
     if (dataset.number[i])
-      integral += dataset.number[i] * 100 / total;
+      integral += dataset.number[i];
 
     dataset.integral.push(integral);
   }
@@ -260,7 +260,7 @@ function draw_chart(data) {
       yAxisID: 'y',
     },
     {
-      label: "Сегодня, интеграл",
+      label: "Сегодня, всего",
       data: td.integral,
       borderColor: 'forestgreen',
       tension: 0.3,
@@ -268,10 +268,10 @@ function draw_chart(data) {
       borderWidth: 1,
       yAxisID: 'y1',
       borderDash: [10,5],
-      hidden: true,
+      //hidden: true,
     },
     {
-      label: "Будни, интеграл",
+      label: "Будни, всего",
       data: bd.integral,
       borderColor: 'lightskyblue',
       tension: 0.3,
@@ -281,7 +281,7 @@ function draw_chart(data) {
       borderDash: [10,5],
     },
     {
-      label: "Выходные, интеграл",
+      label: "Выходные, всего",
       data: wd.integral,
       borderColor: 'lightsalmon',
       tension: 0.3,
@@ -319,7 +319,7 @@ function draw_chart(data) {
           type: 'linear',
           display: true,
           position: 'right',
-          max: 100,
+          //max: 100,
 
           // grid line settings
           grid: {
