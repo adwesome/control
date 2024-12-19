@@ -299,7 +299,7 @@ function draw_chart(data) {
   new Chart('chart-participation', {
     type: 'line',
     data: {
-      labels: [...Array(24).keys()],
+      labels: [...Array(25).keys()].slice(1),
       datasets: datasets,
     },
     options: {
