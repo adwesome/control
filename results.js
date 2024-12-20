@@ -230,7 +230,10 @@ function draw_chart(data) {
   const bd = make_dataset(data.business_days);
   const wd = make_dataset(data.weekends);
   const td = make_dataset(data.today);
+  const yd = make_dataset(data.yesterday);
+  const tdwa = make_dataset(data.same_day_week_ago);
 
+  const today_is = (new Date()).getDay();
   var datasets = [
     {
       label: "Сегодня",
@@ -238,25 +241,25 @@ function draw_chart(data) {
       borderColor: 'forestgreen',
       tension: 0.3,
       pointRadius: 0,
-      borderWidth: 3,
+      borderWidth: 2,
       yAxisID: 'y',
     },
     {
-      label: "Будни",
-      data: bd.number,
-      borderColor: 'lightskyblue',
+      label: "Вчера",
+      data: yd.number,
+      borderColor: today_is <= 5 ? 'lightgreen' : 'lightsalmon',
       tension: 0.3,
       pointRadius: 0,
       borderWidth: 1.5,
       yAxisID: 'y',
     },
     {
-      label: "Выходные",
-      data: wd.number,
-      borderColor: 'lightsalmon',
+      label: "Неделю назад",
+      data: tdwa.number,
+      borderColor: 'forestgreen',
       tension: 0.3,
       pointRadius: 0,
-      borderWidth: 1.5,
+      borderWidth: 1,
       yAxisID: 'y',
     },
     {
@@ -265,32 +268,79 @@ function draw_chart(data) {
       borderColor: 'forestgreen',
       tension: 0.3,
       pointRadius: 0,
-      borderWidth: 1,
+      borderWidth: 2,
       yAxisID: 'y1',
       borderDash: [10,5],
       //hidden: true,
     },
     {
-      label: "Будни, всего",
-      data: bd.integral,
-      borderColor: 'lightskyblue',
+      label: "Вчера, всего",
+      data: yd.integral,
+      borderColor: today_is <= 5 ? 'lightgreen' : 'lightsalmon',
       tension: 0.3,
       pointRadius: 0,
-      borderWidth: 1,
+      borderWidth: 1.5,
       yAxisID: 'y1',
       borderDash: [10,5],
+      //hidden: true,
     },
     {
-      label: "Выходные, всего",
-      data: wd.integral,
-      borderColor: 'lightsalmon',
+      label: "Неделю назад, всего",
+      data: tdwa.integral,
+      borderColor: 'forestgreen',
       tension: 0.3,
       pointRadius: 0,
       borderWidth: 1,
       yAxisID: 'y1',
       borderDash: [10,5],
+      //hidden: true,
     },
   ];
+
+  if (today_is >= 6)  // Sat, Sun
+    datasets.push(
+      {
+        label: "Выходные",
+        data: wd.number,
+        borderColor: 'lightgray',
+        tension: 0.3,
+        pointRadius: 0,
+        borderWidth: 1.5,
+        yAxisID: 'y',
+      },
+      {
+        label: "Выходные, всего",
+        data: wd.integral,
+        borderColor: 'lightgray',
+        tension: 0.3,
+        pointRadius: 0,
+        borderWidth: 1.5,
+        yAxisID: 'y1',
+        borderDash: [10,5],
+      },
+    );
+  else
+    datasets.push(
+      {
+        label: "Будни",
+        data: bd.number,
+        borderColor: 'lightgray',
+        tension: 0.3,
+        pointRadius: 0,
+        borderWidth: 1.5,
+        yAxisID: 'y',
+      },
+      {
+        label: "Будни, всего",
+        data: bd.integral,
+        borderColor: 'lightgray',
+        tension: 0.3,
+        pointRadius: 0,
+        borderWidth: 1.5,
+        yAxisID: 'y1',
+        borderDash: [10,5],
+      },
+  );
 
   if (Chart.getChart('chart-participation')) {  // https://stackoverflow.com/questions/72641188/canvas-is-already-in-use-chart-with-id-0-must-be-destroyed-before-the-canvas
     Chart.getChart('chart-participation')?.destroy();
