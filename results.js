@@ -252,6 +252,7 @@ function draw_chart(data) {
       pointRadius: 0,
       borderWidth: 1.5,
       yAxisID: 'y',
+      hidden: [6, 1].includes(today_is) ? true : false,  // do not show for Sat and Mon because another kind
     },
     {
       label: "Неделю назад",
@@ -282,7 +283,7 @@ function draw_chart(data) {
       borderWidth: 1.5,
       yAxisID: 'y1',
       borderDash: [10,5],
-      //hidden: true,
+      hidden: [6, 1].includes(today_is) ? true : false,  // do not show for Sat and Mon because another kind
     },
     {
       label: "Неделю назад, всего",
