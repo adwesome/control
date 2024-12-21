@@ -255,7 +255,7 @@ function draw_chart(data) {
       hidden: [6, 1].includes(today_is) ? true : false,  // do not show for Sat and Mon because another kind
     },
     {
-      label: "Неделю назад",
+      label: "Этот же день неделю назад",
       data: tdwa.number,
       borderColor: 'forestgreen',
       tension: 0.3,
@@ -264,7 +264,7 @@ function draw_chart(data) {
       yAxisID: 'y',
     },
     {
-      label: "Сегодня, всего",
+      label: "Сегодня, сумма",
       data: td.integral,
       borderColor: 'forestgreen',
       tension: 0.3,
@@ -275,7 +275,7 @@ function draw_chart(data) {
       //hidden: true,
     },
     {
-      label: "Вчера, всего",
+      label: "Вчера, сумма",
       data: yd.integral,
       borderColor: today_is <= 5 ? 'lightgreen' : 'lightsalmon',
       tension: 0.3,
@@ -286,7 +286,7 @@ function draw_chart(data) {
       hidden: [6, 1].includes(today_is) ? true : false,  // do not show for Sat and Mon because another kind
     },
     {
-      label: "Неделю назад, всего",
+      label: "Этот же день неделю назад, сумма",
       data: tdwa.integral,
       borderColor: 'forestgreen',
       tension: 0.3,
@@ -301,7 +301,7 @@ function draw_chart(data) {
   if (today_is >= 6)  // Sat, Sun
     datasets.push(
       {
-        label: "Выходные",
+        label: "Выходные в среднем",
         data: wd.number,
         borderColor: 'lightgray',
         tension: 0.3,
@@ -310,7 +310,7 @@ function draw_chart(data) {
         yAxisID: 'y',
       },
       {
-        label: "Выходные, всего",
+        label: "Выходные в среднем, сумма",
         data: wd.integral,
         borderColor: 'lightgray',
         tension: 0.3,
@@ -323,7 +323,7 @@ function draw_chart(data) {
   else
     datasets.push(
       {
-        label: "Будни",
+        label: "Будни в среднем",
         data: bd.number,
         borderColor: 'lightgray',
         tension: 0.3,
@@ -332,7 +332,7 @@ function draw_chart(data) {
         yAxisID: 'y',
       },
       {
-        label: "Будни, всего",
+        label: "Будни в среднем, сумма",
         data: bd.integral,
         borderColor: 'lightgray',
         tension: 0.3,
