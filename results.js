@@ -233,7 +233,10 @@ function draw_chart(data) {
   const yd = make_dataset(data.yesterday);
   const tdwa = make_dataset(data.same_day_week_ago);
 
-  const today_is = (new Date()).getDay();
+  let today_is = (new Date()).getDay();
+  if (today_is == 0)  // assholes
+    today_is = 7;
+
   var datasets = [
     {
       label: "Сегодня",
@@ -247,7 +250,7 @@ function draw_chart(data) {
     {
       label: "Вчера",
       data: yd.number,
-      borderColor: today_is <= 5 ? 'lightgreen' : 'lightsalmon',
+      borderColor: today_is <= 6 ? 'lightgreen' : 'lightsalmon',
       tension: 0.3,
       pointRadius: 0,
       borderWidth: 1.5,
