@@ -386,6 +386,16 @@ function draw_chart(data) {
 }
 
 window.onload = async function() {
+  try {
+    window.Telegram.WebApp.ready();
+    window.Telegram.WebApp.expand();
+    //window.Telegram.WebApp.requestFullscreen();
+    //window.Telegram.WebApp.setBackgroundColor("#fffaf0");  // floralwhite
+    //window.Telegram.WebApp.setHeaderColor("#fffaf0");  // floralwhite
+  } // Error: WebAppHeaderColorKeyInvalid at setHeaderColor
+  catch(error) {
+    ;
+  }
   draw_ages_checkboxes();
   enable_listeners();
   const data = await get_data();
