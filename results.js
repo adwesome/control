@@ -250,7 +250,7 @@ function draw_chart(data) {
     {
       label: "Вчера",
       data: yd.number,
-      borderColor: today_is <= 6 ? 'lightgreen' : 'lightsalmon',
+      borderColor: 'lightgreen',
       tension: 0.3,
       pointRadius: 0,
       borderWidth: 1.5,
@@ -280,7 +280,7 @@ function draw_chart(data) {
     {
       label: "Вчера, сумма",
       data: yd.integral,
-      borderColor: today_is <= 5 ? 'lightgreen' : 'lightsalmon',
+      borderColor: 'lightgreen',
       tension: 0.3,
       pointRadius: 0,
       borderWidth: 1.5,
