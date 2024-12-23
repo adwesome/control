@@ -237,9 +237,37 @@ function draw_chart(data) {
   if (today_is == 0)  // assholes
     today_is = 7;
 
+  const labels = {
+    'ru': {
+      'today': 'Сегодня',
+      'yesterday': 'Вчера',
+      'same_day_week_ago': 'Этот же день неделю назад',
+      'today_total': 'Сегодня, сумма',
+      'yesterday_total': 'Вчера, сумма',
+      'same_day_week_ago_total': 'Этот же день неделю назад, сумма',
+      'weekends': 'Выходные в среднем',
+      'weekends_total': 'Выходные в среднем, сумма',
+      'business_days': 'Будни в среднем',
+      'business_days_total': 'Будни в среднем, сумма',
+    }, 
+    'en': {
+      'today': 'Today',
+      'yesterday': 'Yesterday',
+      'same_day_week_ago': 'Same day last week',
+      'today_total': 'Today, total',
+      'yesterday_total': 'Yesterday, total',
+      'same_day_week_ago_total': 'Same day last week, total',
+      'weekends': 'Weekends avg.',
+      'weekends_total': 'Weekends avg., total',
+      'business_days': 'Business days avg.',
+      'business_days_total': 'Business days avg., total',
+    }};
+
+  const lang = 'ru';
+
   var datasets = [
     {
-      label: "Сегодня",
+      label: labels[lang].today,
       data: td.number,
       borderColor: 'forestgreen',
       tension: 0.3,
@@ -248,7 +276,7 @@ function draw_chart(data) {
       yAxisID: 'y',
     },
     {
-      label: "Вчера",
+      label: labels[lang].yesterday,
       data: yd.number,
       borderColor: 'lightgreen',
       tension: 0.3,
@@ -258,7 +286,7 @@ function draw_chart(data) {
       hidden: [6, 1].includes(today_is) ? true : false,  // do not show for Sat and Mon because another kind
     },
     {
-      label: "Этот же день неделю назад",
+      label: labels[lang].same_day_week_ago,
       data: tdwa.number,
       borderColor: 'forestgreen',
       tension: 0.3,
@@ -267,7 +295,7 @@ function draw_chart(data) {
       yAxisID: 'y',
     },
     {
-      label: "Сегодня, сумма",
+      label: labels[lang].today_total,
       data: td.integral,
       borderColor: 'forestgreen',
       tension: 0.3,
@@ -278,7 +306,7 @@ function draw_chart(data) {
       //hidden: true,
     },
     {
-      label: "Вчера, сумма",
+      label: labels[lang].yesterday_total,
       data: yd.integral,
       borderColor: 'lightgreen',
       tension: 0.3,
@@ -289,7 +317,7 @@ function draw_chart(data) {
       hidden: [6, 1].includes(today_is) ? true : false,  // do not show for Sat and Mon because another kind
     },
     {
-      label: "Этот же день неделю назад, сумма",
+      label: labels[lang].same_day_week_ago_total,
       data: tdwa.integral,
       borderColor: 'forestgreen',
       tension: 0.3,
@@ -304,7 +332,7 @@ function draw_chart(data) {
   if (today_is >= 6)  // Sat, Sun
     datasets.push(
       {
-        label: "Выходные в среднем",
+        label: labels[lang].weekends,
         data: wd.number,
         borderColor: 'lightgray',
         tension: 0.3,
@@ -313,7 +341,7 @@ function draw_chart(data) {
         yAxisID: 'y',
       },
       {
-        label: "Выходные в среднем, сумма",
+        label: labels[lang].weekends_total,
         data: wd.integral,
         borderColor: 'lightgray',
         tension: 0.3,
@@ -326,7 +354,7 @@ function draw_chart(data) {
   else
     datasets.push(
       {
-        label: "Будни в среднем",
+        label: labels[lang].business_days,
         data: bd.number,
         borderColor: 'lightgray',
         tension: 0.3,
@@ -335,7 +363,7 @@ function draw_chart(data) {
         yAxisID: 'y',
       },
       {
-        label: "Будни в среднем, сумма",
+        label: labels[lang].business_days_total,
         data: bd.integral,
         borderColor: 'lightgray',
         tension: 0.3,
