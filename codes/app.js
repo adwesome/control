@@ -14,7 +14,7 @@ async function get_code() {
 function show_status_gifted(special_state) {
   let html = '';
   if (special_state)
-    html += '<p>Подарок только что отмечен врученным.</p>';
+    html += '<p>Подарок только что отмечен врученным</p>';
   else
     html += '<p>Подарок уже вручен</p><p>Здесь надо какие-то рекомендации продавцу, что следует делать в этой ситуации...</p>';
 
@@ -102,8 +102,10 @@ function draw_data(data) {
     if (code[1] == 2)
       html += '<td>Вручен</td>';
     html += '<td>' + code[2] + '</td>';
-    if (code[3])
-      html += '<td>' + code[3] + '</td>';
+    if (code[3]) {
+      const dt = new Date(code[3] * 1000);
+      html += '<td>' + dt.toDateString() + ', ' + dt.toLocaleTimeString() + '</td>';
+    }
     else
       html += '<td></td>';
     html += '</tr>';
