@@ -164,4 +164,7 @@ window.onload = function() {
   }
   enable_listeners();
   //document.getElementById('code').focus();
+  setTimeout(function() {
+    document.getElementById('code').focus();
+  }, 5000);
 }
