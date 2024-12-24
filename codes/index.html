@@ -86,20 +86,8 @@
       }
     </style>
 
-    <!--script type="text/javascript" src="results.js?v=8"></script-->
+    <script type="text/javascript" src="app.js?v=9"></script>
     <script type="text/javascript">
-      window.onload = async function() {
-        try {
-          window.Telegram.WebApp.ready();
-          window.Telegram.WebApp.expand();
-          //window.Telegram.WebApp.requestFullscreen();
-          //window.Telegram.WebApp.setBackgroundColor("#fffaf0");  // floralwhite
-          //window.Telegram.WebApp.setHeaderColor("#fffaf0");  // floralwhite
-        } // Error: WebAppHeaderColorKeyInvalid at setHeaderColor
-        catch(error) {
-          ;
-        }
-      }
     </script>
   </head>
   <body>
@@ -120,81 +108,13 @@
           <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
               <div class="row">
-                <div class="col-lg-12">
-
-                  <s>0932</s><br>
-                  0945<br>
-                  <s>0967</s><br>
-                  <s>1012</s><br>
-                  1040<br>
-                  1097<br>
-                  <s>1108</s><br>
-                  <s>1159</s><br>
-                  <s>1131</s><br>
-                  1215<br>
-                  <s>1297</s><br>
-                  <s>1248</s><br>
-
-                  1301<br>
-                  <s>1339</s><br>
-                  <s>1395</s><br>
-
-                  1408<br>
-                  1427<br>
-                  <s>1456</s><br>
-
-                  <s>1552</s><br>
-                  1577<br>
-                  <s>1591</s><br>
-
-                  1615<br>
-                  <s>1618</s><br>
-                  1624<br>
-                  1729<br>
-                  <s>1732</s><br>
-                  <s>1742</s><br>
-                  <s>1844</s><br>
-                  1845<br>
-                  <s>1849</s><br>
-                  1957<br>
-                  1963<br>
-                  1972<br>
-                  2073<br>
-                  2074<br>
-                  2076<br>
-                  2178<br>
-                  2180<br>
-                  2184<br>
-                  2285<br>
-                  2294<br>
-                  2295<br>
-
-                  2321<br>
-                  2323<br>
-                  2327<br>
-                  2332<br>
-                  2337<br>
-                  2341<br>
-                  2351<br>
-
-                  2418<br>
-                  2420<br>
-                  2422<br>
-                <!--
-                  2424<br>
-                  2453<br>
-                  2455<br>
-                  2456<br>
-                  2470<br>
-                  2484<br>
-                  2498<br>
-                -->
+                <div class="col-lg-12" id="all_codes">
                 </div>
               </div>
             </div>
             <div class="tab-pane fade show active" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
               <div class="row">
-                <div class="col-lg-4" style="padding: 10px 20px;">
+                <div class="col-lg-4" style="padding: 10px 29px;">
                   <label>Код:</label>
                   
                   <div class="d-grid gap-2">
