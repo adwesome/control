@@ -417,7 +417,7 @@ function estimate_leg(data) {
   const minutes = (new Date()).getMinutes();
   const ds = make_dataset(data.charts.participation.today)
   const estimate_number = Math.round(ds.number[ds.number.length - 1] * 60 / (minutes + 1));
-  const estimate_integral = Math.round(ds.integral[ds.integral.length - 1] * 60 / (minutes + 1));
+  const estimate_integral = ds.integral[ds.integral.length - 1] + estimate_number;
   console.log(ds.integral, ds.integral.length, ds.integral[ds.integral.length - 1])
   document.getElementById('estimate_number').innerHTML = estimate_number;
   document.getElementById('estimate_integral').innerHTML = estimate_integral;
