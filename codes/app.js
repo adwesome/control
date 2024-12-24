@@ -6,30 +6,6 @@ function get_value_from_form(element_id) {
   return document.getElementById(element_id).value;
 }
 
-function focusAndOpenKeyboard(el, timeout) {  // https://stackoverflow.com/questions/54424729/ios-show-keyboard-on-input-focus
-  if(!timeout)
-    timeout = 100;
-  // Align temp input element approximately where the input element is
-  // so the cursor doesn't jump around
-  var __tempEl__ = document.createElement('input');
-  __tempEl__.style.position = 'absolute';
-  __tempEl__.style.top = (el.offsetTop + 7) + 'px';
-  __tempEl__.style.left = el.offsetLeft + 'px';
-  __tempEl__.style.height = 0;
-  //__tempEl__.style.opacity = 0;
-  // Put this temp element as a child of the page <body> and focus on it
-  document.body.appendChild(__tempEl__);
-  __tempEl__.focus();
-
-  // The keyboard is open. Now do a delayed focus on the target element
-  setTimeout(function() {
-    el.focus();
-    el.click();
-    // Remove the temp element
-    //document.body.removeChild(__tempEl__);
-  }, timeout);
-}
-
 async function get_code() {
   const code = get_value_from_form('code');
   return await get_smth('draws/code/check?code=' + code);
@@ -188,10 +164,5 @@ window.onload = function() {
     ;
   }
   enable_listeners();
-  //document.getElementById('code').focus();
-
-  // https://stackoverflow.com/questions/54424729/ios-show-keyboard-on-input-focus
-  var myElement = document.getElementById('code');
-  var modalFadeInDuration = 3000;
-  focusAndOpenKeyboard(myElement, modalFadeInDuration); // or without the second argument
+  document.getElementById('code').focus();
 }
