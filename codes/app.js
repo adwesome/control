@@ -24,6 +24,7 @@ function show_status_gifted(special_state) {
 function show_status_not_gifted() {
   document.getElementById('code_status').innerHTML = '<p>Подарок не вручен</p>';
   document.getElementById('code_update').style.display = 'block';
+  document.getElementById('code_comment').focus();
 }
 function show_status_not_exists() {
   document.getElementById('code_status').innerHTML = '<p>Такого кода не существует</p><p>Здесь надо какие-то рекомендации продавцу, что следует делать в этой ситуации...</p>';
@@ -105,6 +106,7 @@ function draw_data(data) {
     html += '</tr>';
   });
   html += '</tbody>';
+
   document.getElementById("all_codes").innerHTML = html;
   new DataTable('#all-codes-table', {
     language: {
@@ -146,7 +148,7 @@ function draw_data(data) {
   search.focus();
 }
 
-window.onload = async function() {
+window.onload = function() {
   try {
     window.Telegram.WebApp.ready();
     window.Telegram.WebApp.expand();
