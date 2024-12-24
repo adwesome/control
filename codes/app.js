@@ -64,11 +64,17 @@ async function update_code() {
 function enable_listeners() {
   const selectors = document.querySelectorAll('button');
   selectors.forEach((el) => {
-    el.addEventListener('click', function(e) {
+    el.addEventListener('click', async function(e) {
       if (el.id == 'btn_code_check')
         check_code();
       else if (el.id == 'btn_code_update')
         update_code();
+      else if (el.id == 'view-all-codes-tab') {
+        const data = await get_data();
+        draw_data(data);
+      }
+      else if (el.id == 'check-codes-tab')
+        document.getElementById('code').focus();
     });
   });
 }
@@ -83,14 +89,61 @@ async function get_data() {
 }
 
 function draw_data(data) {
-  let html = '';
+  let html = '<table id="all-codes-table" class="table table-striped" style="width:100%"><thead><tr><th>Код</th><th>Статус</th><th>Комментарий</th><th>Дата вручения</th></tr></thead><tbody>';
   data.forEach((code) => {
-    if (code[1] == 2)  // gifted
-      html += `<s>${code[0]}</s><br>`;
-    else  
-      html += `${code[0]}<br>`;
+    html += '<tr>';
+    html += '<td>' + code[0] + '</td>';
+    if (code[1] == 1)
+      html += '<td>Не вручен</td>';
+    if (code[1] == 2)
+      html += '<td>Вручен</td>';
+    html += '<td>' + code[2] + '</td>';
+    if (code[3])
+      html += '<td>' + code[3] + '</td>';
+    else
+      html += '<td></td>';
+    html += '</tr>';
   });
+  html += '</tbody>';
   document.getElementById("all_codes").innerHTML = html;
+  new DataTable('#all-codes-table', {
+    language: {
+      search: "",
+      searchPlaceholder: "Поиск...",
+      emptyTable: "Ничего не найдено",
+      info: "Показано с _START_ по _END_ из _TOTAL_ записей",
+      zeroRecords: 'Ничего не найдено',
+      infoEmpty: "Показано с 0 по 0 из _TOTAL_ записей",
+      infoFiltered:   "(из _MAX_ - общего числа записей)",
+    },
+    paging: false,
+    autoWidth: true,
+    order: [[0, 'desc']],
+    responsive: true,
+    columns: [
+      { width: 'auto', className: 'all' },
+      { width: 'auto', className: 'all' }, // https://datatables.net/extensions/responsive/examples/column-control/classes.html
+      { width: 'auto', className: 'desktop' },
+      { width: 'auto', className: 'desktop' },
+    ],
+    columnDefs2: [
+      {
+        target: 0, // ID
+        visible: false,
+        searchable: false
+      },
+    ],
+    columnDefs: [
+      { type: 'text', targets: 0 }, //{ type: 'num', targets: 5 },
+      { responsivePriority: 1, targets: 0 },
+      { responsivePriority: 1, targets: 1 },
+    ],
+    //stateSave: true,
+  });
+
+  const search = document.getElementsByTagName('input')[0];
+  search.classList.remove('form-control-sm');
+  search.focus();
 }
 
 window.onload = async function() {
@@ -104,7 +157,6 @@ window.onload = async function() {
   catch(error) {
     ;
   }
-  const data = await get_data();
-  draw_data(data);
   enable_listeners();
+  document.getElementById('code').focus();
 }
