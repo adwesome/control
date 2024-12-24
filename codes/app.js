@@ -68,6 +68,7 @@ function draw_code_status(data, special_state) {
 }
 
 async function check_code(special_state) {
+  document.getElementById('code').focus();
   const data = await get_code();
   draw_code_status(data, special_state);
 }
