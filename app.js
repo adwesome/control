@@ -422,6 +422,9 @@ function estimate_leg(data) {
   document.getElementById('estimate_number').innerHTML = estimate_number;
   document.getElementById('estimate_integral').innerHTML = estimate_integral;
 
+  document.getElementById('current_number').innerHTML = ds.number[ds.number.length - 1];
+  document.getElementById('current_integral').innerHTML = ds.integral[ds.integral.length - 1];
+
   const ds_y = make_dataset(data.charts.participation.yesterday)
   const estimate_number_y = Math.round(ds_y.number[ds.number.length - 1]);
   const estimate_integral_y = Math.round(ds_y.integral[ds.integral.length - 1]);
