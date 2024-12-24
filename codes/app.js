@@ -164,7 +164,17 @@ window.onload = function() {
   }
   enable_listeners();
   //document.getElementById('code').focus();
-  setTimeout(function() {
+  //document.getElementById('code').focus();
+
+  if (document.readyState == 'complete') {
     document.getElementById('code').focus();
-  }, 5000);
+    document.getElementById('btn_code_check').innerHTML = 'Проверить...';
+  } else {
+    document.onreadystatechange = function () {
+      if (document.readyState === "complete") {
+        document.getElementById('code').focus();
+        document.getElementById('btn_code_check').innerHTML = 'Проверить..';
+      }
+    }
+  }
 }
