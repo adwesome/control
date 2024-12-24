@@ -78,6 +78,8 @@ function enable_listeners() {
         document.getElementById('code').focus();
     });
   });
+
+  document.getElementById('code').focus();
 }
 
 async function get_smth(smth) {
@@ -109,6 +111,11 @@ function draw_data(data) {
 
   document.getElementById("all_codes").innerHTML = html;
   new DataTable('#all-codes-table', {
+    initComplete: function (settings, json) {
+      const search = document.getElementsByTagName('input')[0];
+      search.classList.remove('form-control-sm');
+      search.focus();
+    },
     language: {
       search: "",
       searchPlaceholder: "Поиск...",
@@ -142,15 +149,6 @@ function draw_data(data) {
     ],
     //stateSave: true,
   });
-
-  const search = document.getElementsByTagName('input')[0];
-  search.classList.remove('form-control-sm');
-  sleep(1000);
-  search.focus();
-}
-
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 window.onload = function() {
@@ -165,6 +163,5 @@ window.onload = function() {
     ;
   }
   enable_listeners();
-  sleep(1000);
-  document.getElementById('code').focus();
+  //document.getElementById('code').focus();
 }
