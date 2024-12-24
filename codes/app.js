@@ -2,25 +2,44 @@ var SERVER_HOSTNAME = 'http://127.0.0.1:5000';
 if (location.hostname)
   SERVER_HOSTNAME = 'https://scratchit.cards';
 
-async function apply_filters() {
-  const data = await get_data();
-  draw_data(data);
-  draw_chart(data.charts.participation);
+async function get_code() {
+  const code = document.getElementById('code').value;
+  const response = await get_smth('draws/code/check?code=' + code);
+  return response;
+}
+
+function draw_code_status(data) {
+  html = '';
+  if (data.code == 404)
+    html += '<p><br>Такого кода не существует</p>';
+  else if (data.code == 200) {
+    const status = data.result[0][1];
+    if (status == 1)
+      html += '<p><br>Подарок не вручен</p>';
+    else if (status == 2)
+      html += '<p><br>Подарок уже вручен</p>';
+  }
+
+  document.getElementById('code_status').innerHTML = html;
+}
+
+async function check_code() {
+  const data = await get_code();
+  draw_code_status(data);
 }
 
 function enable_listeners() {
-  const selectors = document.querySelectorAll('select');
+  const selectors = document.querySelectorAll('button');
   selectors.forEach((el) => {
-    el.addEventListener('change', function(e) {
-      apply_filters();
+    el.addEventListener('click', function(e) {
+      check_code();
     });
   });
 }
 
 async function get_smth(smth) {
   const response = await fetch(SERVER_HOSTNAME + `/${smth}`, {});
-  const o = await response.json();
-  return o;
+  return await response.json();
 }
 
 async function get_data() {
@@ -28,7 +47,6 @@ async function get_data() {
 }
 
 function draw_data(data) {
-  console.log(data);
   let html = '';
   data.forEach((code) => {
     if (code[1] == 2)  // gifted
@@ -52,4 +70,5 @@ window.onload = async function() {
   }
   const data = await get_data();
   draw_data(data);
+  enable_listeners();
 }
