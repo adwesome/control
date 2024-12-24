@@ -25,6 +25,7 @@ function show_status_not_gifted() {
   document.getElementById('code_status').innerHTML = '<p>Подарок не вручен</p>';
   document.getElementById('code_update').style.display = 'block';
   document.getElementById('code_comment').focus();
+  document.getElementById('code_comment').scrollIntoView();
 }
 function show_status_not_exists() {
   document.getElementById('code_status').innerHTML = '<p>Такого кода не существует</p><p>Здесь надо какие-то рекомендации продавцу, что следует делать в этой ситуации...</p>';
