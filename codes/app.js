@@ -16,7 +16,7 @@ function focusAndOpenKeyboard(el, timeout) {  // https://stackoverflow.com/quest
   __tempEl__.style.top = (el.offsetTop + 7) + 'px';
   __tempEl__.style.left = el.offsetLeft + 'px';
   __tempEl__.style.height = 0;
-  __tempEl__.style.opacity = 0;
+  //__tempEl__.style.opacity = 0;
   // Put this temp element as a child of the page <body> and focus on it
   document.body.appendChild(__tempEl__);
   __tempEl__.focus();
@@ -26,7 +26,7 @@ function focusAndOpenKeyboard(el, timeout) {  // https://stackoverflow.com/quest
     el.focus();
     el.click();
     // Remove the temp element
-    document.body.removeChild(__tempEl__);
+    //document.body.removeChild(__tempEl__);
   }, timeout);
 }
 
@@ -68,7 +68,7 @@ function draw_code_status(data, special_state) {
 }
 
 async function check_code(special_state) {
-  document.getElementById('code').focus();
+  //document.getElementById('code').focus();
   const data = await get_code();
   draw_code_status(data, special_state);
 }
@@ -104,7 +104,7 @@ function enable_listeners() {
     });
   });
 
-  document.getElementById('code').focus();
+  //document.getElementById('code').focus();
 }
 
 async function get_smth(smth) {
@@ -192,6 +192,6 @@ window.onload = function() {
 
   // https://stackoverflow.com/questions/54424729/ios-show-keyboard-on-input-focus
   var myElement = document.getElementById('code');
-  var modalFadeInDuration = 300;
+  var modalFadeInDuration = 3000;
   focusAndOpenKeyboard(myElement, modalFadeInDuration); // or without the second argument
 }
