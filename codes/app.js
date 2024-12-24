@@ -145,7 +145,12 @@ function draw_data(data) {
 
   const search = document.getElementsByTagName('input')[0];
   search.classList.remove('form-control-sm');
+  sleep(1000);
   search.focus();
+}
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 window.onload = function() {
@@ -160,5 +165,6 @@ window.onload = function() {
     ;
   }
   enable_listeners();
+  sleep(1000);
   document.getElementById('code').focus();
 }
