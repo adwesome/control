@@ -416,6 +416,7 @@ function draw_chart(data) {
 function estimate_leg(data) {
   const minutes = (new Date()).getMinutes();
   const ds = make_dataset(data.charts.participation.today)
+  console.log(ds)
   const estimate_number = Math.round(ds.number[ds.number.length - 1] * 60 / (minutes + 1));
   const estimate_integral = ds.integral[ds.integral.length - 1] - ds.number[ds.number.length - 1] + estimate_number;
   console.log(ds.integral, ds.integral.length, ds.integral[ds.integral.length - 1])
