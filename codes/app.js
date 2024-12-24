@@ -2,37 +2,73 @@ var SERVER_HOSTNAME = 'http://127.0.0.1:5000';
 if (location.hostname)
   SERVER_HOSTNAME = 'https://scratchit.cards';
 
-async function get_code() {
-  const code = document.getElementById('code').value;
-  const response = await get_smth('draws/code/check?code=' + code);
-  return response;
+function get_value_from_form(element_id) {
+  return document.getElementById(element_id).value;
 }
 
-function draw_code_status(data) {
-  html = '';
-  if (data.code == 404)
-    html += '<p><br>Такого кода не существует</p>';
-  else if (data.code == 200) {
-    const status = data.result[0][1];
-    if (status == 1)
-      html += '<p><br>Подарок не вручен</p>';
-    else if (status == 2)
-      html += '<p><br>Подарок уже вручен</p>';
-  }
+async function get_code() {
+  const code = get_value_from_form('code');
+  return await get_smth('draws/code/check?code=' + code);
+}
+
+function show_status_gifted(special_state) {
+  let html = '';
+  if (special_state)
+    html += '<p>Подарок только что отмечен врученным.</p>';
+  else
+    html += '<p>Подарок уже вручен</p><p>Здесь надо какие-то рекомендации продавцу, что следует делать в этой ситуации...</p>';
 
   document.getElementById('code_status').innerHTML = html;
+  document.getElementById('code_update').style.display = 'none';
+}
+function show_status_not_gifted() {
+  document.getElementById('code_status').innerHTML = '<p>Подарок не вручен</p>';
+  document.getElementById('code_update').style.display = 'block';
+}
+function show_status_not_exists() {
+  document.getElementById('code_status').innerHTML = '<p>Такого кода не существует</p><p>Здесь надо какие-то рекомендации продавцу, что следует делать в этой ситуации...</p>';
 }
 
-async function check_code() {
+function draw_code_status(data, special_state) {
+  if (data.code == 404)
+    return show_status_not_exists();
+
+  if (data.code == 200) {
+    const status = data.result[0][1];
+    if (status == 1)
+      return show_status_not_gifted();
+    if (status == 2)
+      return show_status_gifted(special_state);
+  }
+}
+
+async function check_code(special_state) {
   const data = await get_code();
-  draw_code_status(data);
+  draw_code_status(data, special_state);
+}
+
+async function update_code() {
+  const data = {'code': get_value_from_form('code'), 'comment': get_value_from_form('code_comment')}
+  const response = await fetch(SERVER_HOSTNAME + '/draws/code/update', {
+    mode: 'no-cors',
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  });
+  check_code('just gifted');
 }
 
 function enable_listeners() {
   const selectors = document.querySelectorAll('button');
   selectors.forEach((el) => {
     el.addEventListener('click', function(e) {
-      check_code();
+      if (el.id == 'btn_code_check')
+        check_code();
+      else if (el.id == 'btn_code_update')
+        update_code();
     });
   });
 }

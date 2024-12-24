@@ -84,9 +84,16 @@
       .btn-radio {
         margin-right: 15px;
       }
+
+      #code_status {
+        padding-top: 20px;
+      }
+      #code_update {
+        display: none;
+      }
     </style>
 
-    <script type="text/javascript" src="app.js?v=9"></script>
+    <script type="text/javascript" src="app.js?v=10"></script>
     <script type="text/javascript">
     </script>
   </head>
@@ -119,9 +126,15 @@
                   
                   <div class="d-grid gap-2">
                     <input type="text" name="" id="code" class="form-control" placeholder="" autofocus>
-                    <button class="btn btn-primary">Проверить</button>
+                    <button class="btn btn-primary" id="btn_code_check">Проверить</button>
                   </div>
                   <div id="code_status"></div>
+                  <div id="code_update">
+                    <div class="d-grid gap-2">
+                      <textarea placeholder="Комментарий" class="form-control" id="code_comment"></textarea>
+                      <button class="btn btn-success" id="btn_code_update">Отметить врученным</button>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
