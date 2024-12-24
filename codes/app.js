@@ -152,6 +152,10 @@ function draw_data(data) {
   });
 }
 
+function load() {
+  document.getElementById('code').click();
+}
+
 window.onload = function() {
   try {
     window.Telegram.WebApp.ready();
@@ -164,5 +168,5 @@ window.onload = function() {
     ;
   }
   enable_listeners();
-  document.getElementById('code').focus();
+  //document.getElementById('code').focus();
 }
