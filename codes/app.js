@@ -234,5 +234,5 @@ window.onload = function() {
     ;
   }
   enable_listeners();
-  //document.getElementById('code').focus();
+  document.getElementById('code').focus();
 }
