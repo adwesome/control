@@ -426,14 +426,20 @@ function estimate_leg(data) {
   document.getElementById('estimate_number').innerHTML = estimate_number;
   document.getElementById('estimate_integral').innerHTML = estimate_integral;
 
+  const current_integral = ds.integral[ds.integral.length - 1];
   document.getElementById('current_number').innerHTML = ds.number[ds.number.length - 1];
-  document.getElementById('current_integral').innerHTML = ds.integral[ds.integral.length - 1];
+  document.getElementById('current_integral').innerHTML = current_integral;
 
   const ds_y = make_dataset(data.charts.participation.yesterday)
   const estimate_number_y = Math.round(ds_y.number[ds.number.length - 1]);
   const estimate_integral_y = Math.round(ds_y.integral[ds.integral.length - 1]);
   document.getElementById('estimate_number_y').innerHTML = estimate_number_y;
   document.getElementById('estimate_integral_y').innerHTML = estimate_integral_y;
+
+  const estimated_dau_diff = current_integral - estimate_integral_y
+
+  document.getElementById('dau_eod').innerHTML = estimated_dau_diff + ds_y.integral[ds_y.integral.length - 1];
+  document.getElementById('dau_eod_y').innerHTML = ds_y.integral[ds_y.integral.length - 1];
 }
 
 window.onload = async function() {
