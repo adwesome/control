@@ -22,7 +22,7 @@
     <!--script src="src/telegram/telegram-web-app.js"></script-->
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
-    <!--script src="https://cdn.jsdelivr.net/npm/chart.js"></script-->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 
@@ -96,9 +96,14 @@
         width: 100%;
         margin: 0;
       }
+
+      #stats {
+        padding-top: 10px;
+        text-align: center;
+      }
     </style>
 
-    <script type="text/javascript" src="app.js?v=103"></script>
+    <script type="text/javascript" src="app.js?v=91"></script>
     <script type="text/javascript">
     </script>
   </head>
@@ -111,7 +116,7 @@
 
           <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
-              <button class="nav-link active" id="check-codes-tab" data-bs-toggle="tab" data-bs-target="#check-codes-tab-pane" type="button" role="tab" aria-controls="check-codes-tab-pane" aria-selected="false">Проверка</button>
+              <button class="nav-link active" id="check-codes-tab" data-bs-toggle="tab" data-bs-target="#check-codes-tab-pane" type="button" role="tab" aria-controls="check-codes-tab-pane" aria-selected="false">Проверка кода</button>
             </li>
             <li class="nav-item" role="presentation">
               <button class="nav-link " id="view-all-codes-tab" data-bs-toggle="tab" data-bs-target="#view-all-codes-tab-pane" type="button" role="tab" aria-controls="view-all-codes-tab-pane" aria-selected="true">Все коды</button>
@@ -120,7 +125,11 @@
           <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade" id="view-all-codes-tab-pane" role="tabpanel" aria-labelledby="view-all-codes-tab" tabindex="0">
               <div class="row">
-                <div class="col-lg-12" id="all_codes">
+                <div class="col-lg-12">
+                  <div id="stats"></div>
+                  <canvas id="chart_stats"></canvas>
+                  
+                  <div id="all_codes"></div>
                 </div>
               </div>
             </div>

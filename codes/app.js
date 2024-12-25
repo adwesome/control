@@ -25,7 +25,7 @@ function show_status_not_gifted() {
   document.getElementById('code_status').innerHTML = '<p>Подарок не вручен</p>';
   document.getElementById('code_update').style.display = 'block';
   document.getElementById('code_comment').focus();
-  document.getElementById('code_comment').scrollIntoView();
+  //document.getElementById('code_comment').scrollIntoView();
 }
 function show_status_not_exists() {
   document.getElementById('code_status').innerHTML = '<p>Такого кода не существует</p><p>Здесь надо какие-то рекомендации продавцу, что следует делать в этой ситуации...</p>';
@@ -64,6 +64,72 @@ async function update_code() {
   check_code('just gifted');
 }
 
+function draw_doughnut_chart(stats) {
+  const gifted_percent = Math.round(stats.gifted * 100 / stats.total);
+  const won_percent = 100 - gifted_percent;
+
+  let labels = [];
+  let data = [];
+  let bg_color = [];
+  if (stats.gifted != 0) {
+    labels.push(`Получили подарки (${gifted_percent}%)`);
+    data.push(stats.gifted);
+    bg_color.push('limegreen');
+  }
+  if (stats.wins != 0) {
+    labels.push(`Не пришли за подарками (${won_percent}%)`);
+    data.push(stats.wins);
+    bg_color.push('deepskyblue');
+  }
+
+  canvas_id = 'chart_stats';
+  existing_chart = Chart.getChart(canvas_id);
+  if (existing_chart != undefined)
+    existing_chart.destroy();
+
+  new Chart(canvas_id, {
+    type: 'doughnut',
+    options: {
+      plugins: {
+        legend: {
+          position: 'bottom',
+        },
+        tooltip: {
+          enabled: false,
+        }
+      },
+    },
+    data: {
+      labels: labels,
+      datasets: [{
+        //label: 'My First Dataset',
+        data: data,
+        backgroundColor: bg_color,
+        hoverOffset: 4
+      }]
+    }
+  });
+}
+
+function draw_stats(stats) {
+  let html = `<p>Получили подарки ${stats.gifted} из ${stats.total} человек,<br>${stats.wins} человек не пришли за подарками (либо не отмечены, как пришедшие)`;
+  document.getElementById('stats').innerHTML = html;
+}
+
+function draw_chart(data) {
+  let stats = {'total': 0, 'wins': 0, 'gifted': 0};
+  data.forEach((d) => {
+    stats.total += 1;
+    if (d[1] == 1)
+      stats.wins += 1;
+    if (d[1] == 2)
+      stats.gifted += 1;
+  });
+
+  draw_doughnut_chart(stats);
+  draw_stats(stats);
+}
+
 function enable_listeners() {
   const selectors = document.querySelectorAll('button');
   selectors.forEach((el) => {
@@ -75,6 +141,7 @@ function enable_listeners() {
       else if (el.id == 'view-all-codes-tab') {
         const data = await get_data();
         draw_data(data);
+        draw_chart(data);
       }
       else if (el.id == 'check-codes-tab')
         document.getElementById('code').focus();
@@ -167,5 +234,5 @@ window.onload = function() {
     ;
   }
   enable_listeners();
-  document.getElementById('code').focus();
+  //document.getElementById('code').focus();
 }
