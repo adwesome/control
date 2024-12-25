@@ -192,6 +192,9 @@ function draw_data(data) {
   document.getElementById('par_yesterday').innerHTML = data.campaign.par_yesterday;
   document.getElementById('par_yesterday_percent').innerHTML = Math.round(data.campaign.par_yesterday * 100 / base);
   document.getElementById('cohorts').innerHTML = draw_cohorts(data.cohorts);
+
+  document.getElementById('dau_wau').innerHTML = Math.round(data.audience.players_today * 100 / data.audience.players_week) / 100;
+  document.getElementById('dau_mau').innerHTML = Math.round(data.audience.players_today * 100 / data.audience.players_month) / 100;
 }
 
 function make_dataset(data) {
