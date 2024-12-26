@@ -16,19 +16,19 @@ function show_status_gifted(special_state) {
   if (special_state)
     html += '<p>Подарок только что отмечен врученным</p>';
   else
-    html += '<p>Код найден. Подарок уже вручен</p><p>Здесь надо какие-то рекомендации продавцу, что следует делать в этой ситуации...</p>';
+    html += '<p>🔵 Код найден. Не вручаем подарок, т.к. подарок уже был вручен</p><p>Здесь надо какие-то рекомендации продавцу, что следует делать в этой ситуации...</p>';
 
   document.getElementById('code_status').innerHTML = html;
   document.getElementById('code_update').style.display = 'none';
 }
 function show_status_not_gifted() {
-  document.getElementById('code_status').innerHTML = '<p>Код найден. Подарок не вручен</p>';
+  document.getElementById('code_status').innerHTML = '<p>🟢 Код найден. Вручаем подарок</p>';
   document.getElementById('code_update').style.display = 'block';
   //document.getElementById('code_comment').focus();
   //document.getElementById('code_comment').scrollIntoView();
 }
 function show_status_not_exists() {
-  document.getElementById('code_status').innerHTML = '<p>Такого кода не найдено</p><p>Здесь надо какие-то рекомендации продавцу, что следует делать в этой ситуации...</p>';
+  document.getElementById('code_status').innerHTML = '<p>🔴 Код не найден. Не вручаем подарок</p><p>Здесь надо какие-то рекомендации продавцу, что следует делать в этой ситуации...</p>';
 }
 
 function draw_code_status(data, special_state) {
@@ -187,7 +187,7 @@ function draw_data(data) {
   document.getElementById("all_codes").innerHTML = html;
   new DataTable('#all-codes-table', {
     initComplete: function (settings, json) {
-      const search = document.getElementsByTagName('input')[0];
+      const search = document.querySelectorAll('input[type="search"]')[0];
       search.classList.remove('form-control-sm');
       search.focus();
     },
