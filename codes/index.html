@@ -116,16 +116,22 @@
       #code_comments_select {
         display: none;
       }
+
+      #chart_stats {
+        max-width: 400px;
+        max-height: 400px;
+        margin: auto;
+      }
     </style>
 
-    <script type="text/javascript" src="app.js?v=263"></script>
+    <script type="text/javascript" src="app.js?v=264"></script>
     <script type="text/javascript">
     </script>
   </head>
   <body>
 
     <div class="container">
-      <h2>Коды розыгрышей</h2>
+      <h2>Коды подарков</h2>
       <div class="row">
         <div class="col-lg-12">
 
@@ -151,7 +157,7 @@
                   <div id="code_status"></div>
                   <div id="code_update">
                     <div class="d-grid gap-2">
-                      <label>Название подарка:</label>
+                      <label>Подарок:</label>
                       <select id="code_comments_select" class="form-select"></select>
                       <textarea placeholder="Укажите, какой подарок вручили, если его нет в списке выше" class="form-control" id="code_comment"></textarea>
                       <button class="btn btn-success" id="btn_code_update">Отметить врученным</button>
