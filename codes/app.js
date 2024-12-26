@@ -24,7 +24,7 @@ function show_status_gifted(special_state) {
 function show_status_not_gifted() {
   document.getElementById('code_status').innerHTML = '<p>Код найден. Подарок не вручен</p>';
   document.getElementById('code_update').style.display = 'block';
-  document.getElementById('code_comment').focus();
+  //document.getElementById('code_comment').focus();
   //document.getElementById('code_comment').scrollIntoView();
 }
 function show_status_not_exists() {
@@ -51,7 +51,11 @@ async function check_code(special_state) {
 }
 
 async function update_code() {
-  const data = {'code': get_value_from_form('code'), 'comment': get_value_from_form('code_comment')}
+  let comment = get_value_from_form('code_comments_select');
+  if (!comment)
+    comment = get_value_from_form('code_comment');
+
+  const data = {'code': get_value_from_form('code'), 'comment': comment}
   const response = await fetch(SERVER_HOSTNAME + '/draws/code/update', {
     mode: 'no-cors',
     method: 'POST',
@@ -112,7 +116,7 @@ function draw_doughnut_chart(stats) {
 }
 
 function draw_stats(stats) {
-  let html = `<p>Получили подарки ${stats.gifted} из ${stats.total} человек,<br>${stats.wins} человек не пришли за подарками (либо не отмечены, как пришедшие)`;
+  let html = `<p>Получили подарки ${stats.gifted} из ${stats.total} человек, остальные ${stats.wins} пока не пришли`;
   document.getElementById('stats').innerHTML = html;
 }
 
@@ -240,6 +244,19 @@ function enable_seller() {
   document.getElementById('view-all-codes-tab-pane').style.visibility = 'hidden';
 }
 
+async function get_comments() {
+  const comments = await get_smth('get/draws/codes/comments');
+  if (!comments)
+    return;
+
+  document.getElementById('code_comments_select').style.display = 'unset';
+  let html = '<option value="">- Выберите из существующих -</option>';
+  for (let i = 0; i < comments.result.length; i++) {
+    html += `<option>${comments.result[i]}</option>`;
+  }
+  document.getElementById('code_comments_select').innerHTML = html;
+}
+
 window.onload = function() {
   try {
     window.Telegram.WebApp.ready();
@@ -259,5 +276,7 @@ window.onload = function() {
     enable_seller();
 
   enable_listeners();
+  get_comments();
+
   document.getElementById('code').focus();
 }

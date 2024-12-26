@@ -113,9 +113,12 @@
       #view-all-codes-tab, #view-all-codes-tab-pane {
         visibility-: hidden;
       }
+      #code_comments_select {
+        display: none;
+      }
     </style>
 
-    <script type="text/javascript" src="app.js?v=261"></script>
+    <script type="text/javascript" src="app.js?v=262"></script>
     <script type="text/javascript">
     </script>
   </head>
@@ -148,8 +151,9 @@
                   <div id="code_status"></div>
                   <div id="code_update">
                     <div class="d-grid gap-2">
-                      <label>Комментарий (опционально):</label>
-                      <textarea placeholder="Укажите, какой подарок вручили" class="form-control" id="code_comment"></textarea>
+                      <label>Комментарий / название подарка:</label>
+                      <select id="code_comments_select" class="form-select"></select>
+                      <textarea placeholder="Укажите, какой подарок вручили, если его нет в списке выше" class="form-control" id="code_comment"></textarea>
                       <button class="btn btn-success" id="btn_code_update">Отметить врученным</button>
                     </div>
                   </div>
