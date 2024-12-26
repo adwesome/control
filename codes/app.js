@@ -79,27 +79,27 @@ function draw_doughnut_chart(stats) {
   let data = [];
   let bg_color = [];
   if (stats.gifted != 0) {
-    labels.push(`Получили подарки (${gifted_percent}%)`);
+    labels.push(`Получили подарки (${stats.gifted} шт., ${gifted_percent}%)`);
     data.push(stats.gifted);
     bg_color.push('limegreen');
   }
   if (stats.wins != 0) {
-    labels.push(`Не пришли за подарками (${won_percent}%)`);
+    labels.push(`Назначен, ждем выбор (${stats.wins} шт., ${won_percent}%)`);
     data.push(stats.wins);
     bg_color.push('deepskyblue');
   }
   if (stats.await != 0) {
-    labels.push(`Придут за подарками (${await_percent}%)`);
+    labels.push(`Придут за подарками (${stats.await} шт., ${await_percent}%)`);
     data.push(stats.await);
     bg_color.push('orangered');
   }
   if (stats.await_another != 0) {
-    labels.push(`Придет за подарками кто-то другой (${await_another_percent}%)`);
+    labels.push(`Другой придет за подарками (${stats.await_another} шт., ${await_another_percent}%)`);
     data.push(stats.await_another);
     bg_color.push('orange');
   }
   if (stats.dont_await != 0) {
-    labels.push(`Придет за подарками кто-то другой (${dont_await_percent}%)`);
+    labels.push(`Не придут (${stats.dont_await} шт., ${dont_await_percent}%)`);
     data.push(stats.dont_await);
     bg_color.push('black');
   }
@@ -134,7 +134,7 @@ function draw_doughnut_chart(stats) {
 }
 
 function draw_stats(stats) {
-  let html = `<p>Получили подарки ${stats.gifted} из ${stats.total} человек, остальные ${stats.wins} пока не пришли`;
+  let html = `<p>Всего подарков: ${stats.total}</p>`;
   document.getElementById('stats').innerHTML = html;
 }
 
