@@ -222,17 +222,42 @@ function draw_data(data) {
   });
 }
 
+function get_tguid_from_url() {  // https://www.sitepoint.com/get-url-parameters-with-javascript/
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const id = urlParams.get('a');
+  if (!id)
+    return -1
+  return parseInt(id);
+}
+
+function enable_admin() {
+  document.getElementById('view-all-codes-tab').style.visibility = 'visible';
+  document.getElementById('view-all-codes-tab-pane').style.visibility = 'visible';
+}
+function enable_seller() {
+  document.getElementById('view-all-codes-tab').style.visibility = 'hidden';
+  document.getElementById('view-all-codes-tab-pane').style.visibility = 'hidden';
+}
+
 window.onload = function() {
   try {
     window.Telegram.WebApp.ready();
     window.Telegram.WebApp.expand();
     //window.Telegram.WebApp.requestFullscreen();
     //window.Telegram.WebApp.setBackgroundColor("#fffaf0");  // floralwhite
-    //window.Telegram.WebApp.setHeaderColor("#fffaf0");  // floralwhite
+    window.Telegram.WebApp.setHeaderColor("#fffaf0");  // floralwhite
   } // Error: WebAppHeaderColorKeyInvalid at setHeaderColor
   catch(error) {
     ;
   }
+
+  const tguid = get_tguid_from_url();
+  if ([359070623, 5144394044].includes(tguid))
+    enable_admin();
+  else
+    enable_seller();
+
   enable_listeners();
   document.getElementById('code').focus();
 }
