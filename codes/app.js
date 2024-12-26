@@ -194,7 +194,7 @@ function draw_data(data) {
     html += '<tr>';
     html += '<td>' + code[0] + '</td>';
     if (code[1] == 1)
-      html += '<td>Не вручен</td>';
+      html += '<td>Назначен, ждем выбор</td>';
     if (code[1] == 2)
       html += '<td>Вручен</td>';
     if (code[1] == 3)
