@@ -173,6 +173,12 @@ function draw_data(data) {
       html += '<td>Не вручен</td>';
     if (code[1] == 2)
       html += '<td>Вручен</td>';
+    if (code[1] == 3)
+      html += '<td>Придут</td>';
+    if (code[1] == 4)
+      html += '<td>Придет кто-то другой</td>';
+    if (code[1] == 5)
+      html += '<td>Не придут</td>';
     html += '<td>' + code[2] + '</td>';
     if (code[3]) {
       const dt = new Date(code[3] * 1000);
