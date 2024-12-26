@@ -207,8 +207,8 @@ function draw_data(data) {
     columns: [
       { width: 'auto', className: 'all' },
       { width: 'auto', className: 'all' }, // https://datatables.net/extensions/responsive/examples/column-control/classes.html
-      { width: 'auto', className: 'tablet-l' },
-      { width: 'auto', className: 'tablet-p' },
+      { width: 'auto', className: 'tablet-l desktop' },
+      { width: 'auto', className: 'tablet-p tablet-l desktop' },
     ],
     columnDefs2: [
       {
