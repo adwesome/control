@@ -70,7 +70,10 @@ async function update_code() {
 
 function draw_doughnut_chart(stats) {
   const gifted_percent = Math.round(stats.gifted * 100 / stats.total);
-  const won_percent = 100 - gifted_percent;
+  const await_percent = Math.round(stats.await * 100 / stats.total);
+  const await_another_percent = Math.round(stats.await_another * 100 / stats.total);
+  const dont_await_percent = Math.round(stats.dont_await * 100 / stats.total);
+  const won_percent = 100 - gifted_percent - await_percent - await_another_percent - dont_await_percent;
 
   let labels = [];
   let data = [];
@@ -84,6 +87,21 @@ function draw_doughnut_chart(stats) {
     labels.push(`Не пришли за подарками (${won_percent}%)`);
     data.push(stats.wins);
     bg_color.push('deepskyblue');
+  }
+  if (stats.await != 0) {
+    labels.push(`Придут за подарками (${await_percent}%)`);
+    data.push(stats.await);
+    bg_color.push('orangered');
+  }
+  if (stats.await_another != 0) {
+    labels.push(`Придет за подарками кто-то другой (${await_another_percent}%)`);
+    data.push(stats.await_another);
+    bg_color.push('orange');
+  }
+  if (stats.dont_await != 0) {
+    labels.push(`Придет за подарками кто-то другой (${dont_await_percent}%)`);
+    data.push(stats.dont_await);
+    bg_color.push('black');
   }
 
   canvas_id = 'chart_stats';
@@ -121,13 +139,19 @@ function draw_stats(stats) {
 }
 
 function draw_chart(data) {
-  let stats = {'total': 0, 'wins': 0, 'gifted': 0};
+  let stats = {'total': 0, 'wins': 0, 'gifted': 0, 'await': 0, 'await_another': 0, 'dont_await': 0};
   data.forEach((d) => {
     stats.total += 1;
     if (d[1] == 1)
       stats.wins += 1;
     if (d[1] == 2)
       stats.gifted += 1;
+    if (d[1] == 3)
+      stats.await += 1;
+    if (d[1] == 4)
+      stats.await_another += 1;
+    if (d[1] == 5)
+      stats.dont_await += 1;
   });
 
   draw_doughnut_chart(stats);
