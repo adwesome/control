@@ -95,12 +95,12 @@ function draw_doughnut_chart(stats) {
   if (stats.wins != 0) {
     labels.push(`Назначен, ждем выбор (${stats.wins} шт., ${won_percent}%)`);
     data.push(stats.wins);
-    bg_color.push('deepskyblue');
+    bg_color.push('lightgray');
   }
   if (stats.await != 0) {
     labels.push(`Придут за подарками (${stats.await} шт., ${await_percent}%)`);
     data.push(stats.await);
-    bg_color.push('orangered');
+    bg_color.push('deepskyblue');
   }
   if (stats.await_another != 0) {
     labels.push(`Другой придет за подарками (${stats.await_another} шт., ${await_another_percent}%)`);
