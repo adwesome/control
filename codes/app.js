@@ -24,12 +24,16 @@ function show_status_gifted(special_state) {
 function show_status_not_gifted() {
   document.getElementById('code_status').innerHTML = '<p>🟢 Код найден. Придет выигравший. Вручаем подарок только по коду из приложения.</p>';
   document.getElementById('code_update').style.display = 'block';
+  document.getElementById('code_comments_select').value = '';
+  document.getElementById('code_comment').value = '';
   //document.getElementById('code_comment').focus();
   //document.getElementById('code_comment').scrollIntoView();
 }
 function show_status_not_gifted_allowed() {
   document.getElementById('code_status').innerHTML = '<p>🟡 Код найден. Придет за подарком кто-то другой. Вручаем подарок по коду, предъявленному как угодно.</p>';
   document.getElementById('code_update').style.display = 'block';
+  document.getElementById('code_comments_select').value = '';
+  document.getElementById('code_comment').value = '';
   //document.getElementById('code_comment').focus();
   //document.getElementById('code_comment').scrollIntoView();
 }
