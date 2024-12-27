@@ -37,10 +37,12 @@ function draw_code_status(data, special_state) {
 
   if (data.code == 200) {
     const status = data.result[0][1];
-    if (status == 1)
+    if ([1, 3, 5].includes(status))
       return show_status_not_gifted();
     if (status == 2)
       return show_status_gifted(special_state);
+    if (status == 4)
+      return show_status_not_gifted('others');
   }
 }
 
