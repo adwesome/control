@@ -16,19 +16,26 @@ function show_status_gifted(special_state) {
   if (special_state)
     html += '<p>Подарок только что отмечен врученным</p>';
   else
-    html += '<p>🔵 Код найден. Не вручаем подарок, т.к. подарок уже был вручен</p><p>Здесь надо какие-то рекомендации продавцу, что следует делать в этой ситуации...</p>';
+    html += '<p>🔵 Код найден. Не вручаем подарок, т.к. подарок уже был вручен.</p><p>Здесь надо какие-то рекомендации продавцу, что следует делать в этой ситуации...</p>';
 
   document.getElementById('code_status').innerHTML = html;
   document.getElementById('code_update').style.display = 'none';
 }
 function show_status_not_gifted() {
-  document.getElementById('code_status').innerHTML = '<p>🟢 Код найден. Вручаем подарок</p>';
+  document.getElementById('code_status').innerHTML = '<p>🟢 Код найден. Придет выигравший. Вручаем подарок только по коду из приложения.</p>';
+  document.getElementById('code_update').style.display = 'block';
+  //document.getElementById('code_comment').focus();
+  //document.getElementById('code_comment').scrollIntoView();
+}
+function show_status_not_gifted_allowed() {
+  document.getElementById('code_status').innerHTML = '<p>🟡 Код найден. Придет за подарком кто-то другой. Вручаем подарок по коду, предъявленному как угодно.</p>';
   document.getElementById('code_update').style.display = 'block';
   //document.getElementById('code_comment').focus();
   //document.getElementById('code_comment').scrollIntoView();
 }
 function show_status_not_exists() {
   document.getElementById('code_status').innerHTML = '<p>🔴 Код не найден. Не вручаем подарок</p><p>Здесь надо какие-то рекомендации продавцу, что следует делать в этой ситуации...</p>';
+  document.getElementById('code_update').style.display = 'none';
 }
 
 function draw_code_status(data, special_state) {
@@ -42,7 +49,7 @@ function draw_code_status(data, special_state) {
     if (status == 2)
       return show_status_gifted(special_state);
     if (status == 4)
-      return show_status_not_gifted('others');
+      return show_status_not_gifted_allowed();
   }
 }
 
