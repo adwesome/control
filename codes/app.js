@@ -114,7 +114,7 @@ function draw_doughnut_chart(stats) {
   if (stats.dont_await != 0) {
     labels.push(`Не придут (${stats.dont_await} шт., ${dont_await_percent}%)`);
     data.push(stats.dont_await);
-    bg_color.push('black');
+    bg_color.push('red');
   }
 
   canvas_id = 'chart_stats';
