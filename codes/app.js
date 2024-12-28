@@ -3,7 +3,7 @@ if (location.hostname)
   SERVER_HOSTNAME = 'https://scratchit.cards';
 
 function get_value_from_form(element_id) {
-  return document.getElementById(element_id).value;
+  return document.getElementById(element_id).value.trim();
 }
 
 async function get_code() {
