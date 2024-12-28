@@ -7,8 +7,9 @@ function get_value_from_form(element_id) {
 }
 
 async function get_code() {
+  const tguid = get_tguid_from_url();
   const code = get_value_from_form('code');
-  return await get_smth('draws/code/check?code=' + code);
+  return await get_smth(`draws/code/check?code=${code}&a=${tguid}`);
 }
 
 function show_status_gifted(special_state) {
@@ -287,8 +288,8 @@ function enable_seller() {
   document.getElementById('view-all-codes-tab-pane').style.visibility = 'hidden';
 }
 
-async function get_comments() {
-  const comments = await get_smth('get/draws/codes/comments');
+async function get_comments(tguid) {
+  const comments = await get_smth(`get/draws/codes/comments?a=${tguid}`);
   if (!comments)
     return;
 
@@ -319,7 +320,7 @@ window.onload = function() {
     enable_seller();
 
   enable_listeners();
-  get_comments();
+  get_comments(tguid);
 
   document.getElementById('code').focus();
 }
