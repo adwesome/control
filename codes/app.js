@@ -174,7 +174,7 @@ function draw_doughnut_chart(stats) {
 }
 
 function draw_stats(stats) {
-  let html = `<p>Всего подарков: ${stats.total}</p>`;
+  let html = `<p>Всего подарков: ${stats.total - 6}</p>`;
   document.getElementById('stats').innerHTML = html;
 }
 
@@ -238,30 +238,33 @@ async function get_data() {
 function draw_data(data) {
   let html = '<table id="all-codes-table" class="table table-striped" style="width:100%"><thead><tr><th>Код</th><th>Статус</th><th>Комментарий</th><th>Дата вручения</th></tr></thead><tbody>';
   data.forEach((code) => {
-    html += '<tr>';
-    if (code[1] == 6 || code[1] == 7)
-      code[1] = 1;
-    html += '<td>' + code[0] + '</td>';
-    if (code[1] == 1)
-      html += '<td>Назначен, ждем выбор</td>';
-    else if (code[1] == 2)
-      html += '<td>Вручен</td>';
-    else if (code[1] == 3)
-      html += '<td>Придут</td>';
-    else if (code[1] == 4)
-      html += '<td>Придет кто-то другой</td>';
-    else if (code[1] == 5)
-      html += '<td>Не придут</td>';
-    else
-      html += `<td>Неизвестный статус: ${code[1]}</td>`;
-    html += '<td>' + code[2] + '</td>';
-    if (code[3]) {
-      const dt = new Date(code[3] * 1000);
-      html += '<td>' + dt.toDateString() + ', ' + dt.toLocaleTimeString() + '</td>';
+    if (code[1] == 6 || code[1] == 7) {
+      ;
     }
-    else
-      html += '<td></td>';
-    html += '</tr>';
+    else {
+      html += '<tr>';
+      html += '<td>' + code[0] + '</td>';
+      if (code[1] == 1)
+        html += '<td>Назначен, ждем выбор</td>';
+      else if (code[1] == 2)
+        html += '<td>Вручен</td>';
+      else if (code[1] == 3)
+        html += '<td>Придут</td>';
+      else if (code[1] == 4)
+        html += '<td>Придет кто-то другой</td>';
+      else if (code[1] == 5)
+        html += '<td>Не придут</td>';
+      else
+        html += `<td>Неизвестный статус: ${code[1]}</td>`;
+      html += '<td>' + code[2] + '</td>';
+      if (code[3]) {
+        const dt = new Date(code[3] * 1000);
+        html += '<td>' + dt.toDateString() + ', ' + dt.toLocaleTimeString() + '</td>';
+      }
+      else
+        html += '<td></td>';
+      html += '</tr>';
+    }
   });
   html += '</tbody>';
 
