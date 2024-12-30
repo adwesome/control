@@ -9,7 +9,8 @@ function get_value_from_form(element_id) {
 async function get_code() {
   const tguid = get_tguid_from_url();
   const code = get_value_from_form('code');
-  return await get_smth(`draws/code/check?code=${code}&a=${tguid}`);
+  if (code)
+    return await get_smth(`draws/code/check?code=${code}&a=${tguid}`);
 }
 
 function show_status_gifted(special_state, data) {
@@ -76,7 +77,8 @@ function draw_code_status(data, special_state) {
 async function check_code(special_state) {
   //document.getElementById('code').focus();
   const data = await get_code();
-  draw_code_status(data, special_state);
+  if (data)
+    draw_code_status(data, special_state);
 }
 
 function input_field_cleanup() {
