@@ -12,12 +12,21 @@ async function get_code() {
   return await get_smth(`draws/code/check?code=${code}&a=${tguid}`);
 }
 
-function show_status_gifted(special_state) {
+function show_status_gifted(special_state, data) {
   let html = '';
   if (special_state)
     html += '<p>Подарок только что отмечен врученным</p>';
-  else
-    html += '<p>🔵 Код найден. Не вручаем подарок, т.к. подарок уже был вручен.</p><p>Здесь надо какие-то рекомендации продавцу, что следует делать в этой ситуации...</p>';
+  else {
+    html += `<p>🔵 Код найден. Не вручаем подарок, т.к. подарок уже был вручен`;
+    if (data[2])
+      html += `: ${data[2]}`;
+    if (data[3])
+      html += `. Дата вручения: ${Date(data[3])}`;
+    else
+      html += '. Дата вручения не указана.'
+    html += '</p>';
+    html += `<p>Здесь надо какие-то рекомендации продавцу, что следует делать в этой ситуации...</p>`;
+  }
 
   document.getElementById('code_status').innerHTML = html;
   document.getElementById('code_update').style.display = 'none';
@@ -27,7 +36,7 @@ function show_status_not_gifted() {
   document.getElementById('code_update').style.display = 'block';
   document.getElementById('code_comments_select').value = '';
   document.getElementById('code_comment').value = '';
-  //document.getElementById('code_comment').focus();
+  document.getElementById('code_comments_select').focus();
   //document.getElementById('code_comment').scrollIntoView();
 }
 function show_status_not_gifted_allowed() {
@@ -42,6 +51,10 @@ function show_status_not_exists() {
   document.getElementById('code_status').innerHTML = '<p>🔴 Код не найден. Не вручаем подарок</p><p>Здесь надо какие-то рекомендации продавцу, что следует делать в этой ситуации...</p>';
   document.getElementById('code_update').style.display = 'none';
 }
+function unknown_status(status) {
+  document.getElementById('code_status').innerHTML = `<p>Неизвестный статус у подарка: ${status}</p>`;
+  document.getElementById('code_update').style.display = 'none';
+}
 
 function draw_code_status(data, special_state) {
   if (data.code == 404)
@@ -52,9 +65,11 @@ function draw_code_status(data, special_state) {
     if ([1, 3, 5].includes(status))
       return show_status_not_gifted();
     if (status == 2)
-      return show_status_gifted(special_state);
+      return show_status_gifted(special_state, data.result[0]);
     if (status == 4)
       return show_status_not_gifted_allowed();
+    else
+      return unknown_status(status);
   }
 }
 
@@ -62,6 +77,13 @@ async function check_code(special_state) {
   //document.getElementById('code').focus();
   const data = await get_code();
   draw_code_status(data, special_state);
+}
+
+function input_field_cleanup() {
+  document.getElementById('code').value = '';
+}
+function input_field_focus() {
+  document.getElementById('code').focus();
 }
 
 async function update_code() {
@@ -80,6 +102,8 @@ async function update_code() {
     body: JSON.stringify(data)
   });
   check_code('just gifted');
+  input_field_cleanup();
+  input_field_focus();
 }
 
 function draw_doughnut_chart(stats) {
@@ -153,7 +177,8 @@ function draw_stats(stats) {
 }
 
 function draw_chart(data) {
-  let stats = {'total': 0, 'wins': 0, 'gifted': 0, 'await': 0, 'await_another': 0, 'dont_await': 0};
+  let stats = {'total': 0, 'wins': 0, 'gifted': 0, 'await': 0, 'await_another': 0, 'dont_await': 0,
+  'annul_not_respond': 0, 'annul_rejected': 0};
   data.forEach((d) => {
     stats.total += 1;
     if (d[1] == 1)
@@ -190,6 +215,12 @@ function enable_listeners() {
     });
   });
 
+  document.getElementById('code').addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+      check_code();
+    }
+  });
+
   //document.getElementById('code').focus();
 }
 
@@ -209,14 +240,16 @@ function draw_data(data) {
     html += '<td>' + code[0] + '</td>';
     if (code[1] == 1)
       html += '<td>Назначен, ждем выбор</td>';
-    if (code[1] == 2)
+    else if (code[1] == 2)
       html += '<td>Вручен</td>';
-    if (code[1] == 3)
+    else if (code[1] == 3)
       html += '<td>Придут</td>';
-    if (code[1] == 4)
+    else if (code[1] == 4)
       html += '<td>Придет кто-то другой</td>';
-    if (code[1] == 5)
+    else if (code[1] == 5)
       html += '<td>Не придут</td>';
+    else
+      html += `<td>Неизвестный статус: ${code[1]}</td>`;
     html += '<td>' + code[2] + '</td>';
     if (code[3]) {
       const dt = new Date(code[3] * 1000);
