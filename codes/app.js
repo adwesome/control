@@ -237,6 +237,8 @@ function draw_data(data) {
   let html = '<table id="all-codes-table" class="table table-striped" style="width:100%"><thead><tr><th>Код</th><th>Статус</th><th>Комментарий</th><th>Дата вручения</th></tr></thead><tbody>';
   data.forEach((code) => {
     html += '<tr>';
+    if (code[1] == 6 || code[1] == 7)
+      code[1] = 1;
     html += '<td>' + code[0] + '</td>';
     if (code[1] == 1)
       html += '<td>Назначен, ждем выбор</td>';
