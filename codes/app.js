@@ -183,15 +183,17 @@ function draw_chart(data) {
   'annul_not_respond': 0, 'annul_rejected': 0};
   data.forEach((d) => {
     stats.total += 1;
-    if (d[1] == 1)
+    if (d[1] == 1 && !d[4] && !d[3])
       stats.wins += 1;
-    if (d[1] == 2)
+    else if (d[1] == 1 && d[4] == 2)
       stats.gifted += 1;
-    if (d[1] == 3)
+    else if (d[1] == 1 && d[3])
+      stats.gifted += 1;
+    else if (d[1] == 1 && d[4] == 3)
       stats.await += 1;
-    if (d[1] == 4)
+    else if (d[1] == 1 && d[4] == 4)
       stats.await_another += 1;
-    if (d[1] == 5)
+    else if (d[1] == 1 && d[4] == 5)
       stats.dont_await += 1;
   });
 
@@ -238,24 +240,26 @@ async function get_data() {
 function draw_data(data) {
   let html = '<table id="all-codes-table" class="table table-striped" style="width:100%"><thead><tr><th>Код</th><th>Статус</th><th>Комментарий</th><th>Дата вручения</th></tr></thead><tbody>';
   data.forEach((code) => {
-    if (code[1] == 6 || code[1] == 7) {
+    if (code[4] == 6 || code[4] == 7) {
       ;
     }
     else {
       html += '<tr>';
       html += '<td>' + code[0] + '</td>';
-      if (code[1] == 1)
+      if (code[1] == 1 && !code[4] && !code[3])
         html += '<td>Назначен, ждем выбор</td>';
-      else if (code[1] == 2)
+      else if (code[1] == 1 && code[4] == 2)
         html += '<td>Вручен</td>';
-      else if (code[1] == 3)
+      else if (code[1] == 1 && code[3])
+        html += '<td>Вручен</td>';
+      else if (code[1] == 1 && code[4] == 3)
         html += '<td>Придут</td>';
-      else if (code[1] == 4)
+      else if (code[1] == 1 && code[4] == 4)
         html += '<td>Придет кто-то другой</td>';
-      else if (code[1] == 5)
+      else if (code[1] == 1 && code[4] == 5)
         html += '<td>Не придут</td>';
       else
-        html += `<td>Неизвестный статус: ${code[1]}</td>`;
+        html += `<td>Неизвестный статус: ${code[1]}, ${code[4]}, ${code[3]}</td>`;
       html += '<td>' + code[2] + '</td>';
       if (code[3]) {
         const dt = new Date(code[3] * 1000);
